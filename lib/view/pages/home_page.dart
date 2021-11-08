@@ -230,30 +230,32 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: InkWell(
-                  onTap: () {
-                    shoeControll.shoe = homeControll.newShoeList[index];
-                    shoeControll.cFav();
-                  },
-                  child: Container(
-                    width: 35,
-                    height: 35,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorConstants.white,
-                        border: Border.all(color: Colors.red)),
-                    child: Center(
-                        child: FlareActor(
-                      'assets/Like.flr',
-                      alignment: Alignment.center,
-                      fit: BoxFit.contain,
-                      animation: shoe.isFav.value,
-                    )),
+              Obx(() {
+                return Align(
+                  alignment: Alignment.topLeft,
+                  child: InkWell(
+                    onTap: () {
+                      shoeControll.shoe = homeControll.newShoeList[index];
+                      shoeControll.cFav();
+                    },
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: ColorConstants.white,
+                          border: Border.all(color: Colors.red)),
+                      child: Center(
+                          child: FlareActor(
+                        'assets/Like.flr',
+                        alignment: Alignment.center,
+                        fit: BoxFit.contain,
+                        animation: shoe.isFav.value,
+                      )),
+                    ),
                   ),
-                ),
-              ),
+                );
+              }),
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Container(

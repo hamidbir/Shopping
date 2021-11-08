@@ -14,6 +14,13 @@ class HomePageController extends GetxController {
   var trendList = <Shoe>[].obs;
   var bannerList = <String>[].obs;
   @override
+  void onReady() {
+    super.onReady();
+    fav.fetchFavData();
+    fetchHomePageData();
+  }
+
+  @override
   void onInit() {
     super.onInit();
     fav.fetchFavData();

@@ -125,7 +125,8 @@ class HomePage extends StatelessWidget {
                     //  physics: NeverScrollableScrollPhysics(),
                     itemCount: homeControll.newShoeList.length,
                     itemBuilder: (context, index) {
-                      return makeItem(homeControll.newShoeList[index], index);
+                      return makeItem(
+                          homeControll.newShoeList[index], index, context);
                       //return Text(homeControll.newShoeList[index].name);
                     },
                   ),
@@ -141,7 +142,7 @@ class HomePage extends StatelessWidget {
     ));
   }
 
-  Widget makeItem(Shoe shoe, int index) {
+  Widget makeItem(Shoe shoe, int index, BuildContext context) {
     final HomePageController homeControll = Get.find();
     ShoeCardController shoeControll = Get.find();
 
@@ -153,7 +154,10 @@ class HomePage extends StatelessWidget {
         shoeControll.selectedColor.value =
             homeControll.newShoeList[index].colors.first;
         //shoeControll.favManage.value = 'Idle';
-        Get.to(const DetailShoe());
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const DetailShoe()));
+
+//        Get.to(const DetailShoe());
       },
       child: Hero(
         tag: shoe.id,

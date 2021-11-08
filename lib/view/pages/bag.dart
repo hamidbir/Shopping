@@ -66,24 +66,24 @@ class Bag extends StatelessWidget {
                     return Column(
                       // crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Obx(() {
-                          return ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: bagController.itemList.length,
-                            itemBuilder: (context, index) {
-                              final bagItem = bagController.itemList[index];
-                              return BagCard(
-                                  product: BagModel(
-                                      productName: bagItem.name,
-                                      prductColor: bagItem.colors[0],
-                                      productSize: bagItem.size[0],
-                                      prodctQuantity: 1,
-                                      productPrice: bagItem.price,
-                                      productImg: bagItem.imageURL[0]));
-                            },
-                          );
-                        }),
+                        // Obx(() {
+                        //   return ListView.builder(
+                        //     shrinkWrap: true,
+                        //     physics: const NeverScrollableScrollPhysics(),
+                        //     itemCount: bagController.itemList.length,
+                        //     itemBuilder: (context, index) {
+                        //       final bagItem = bagController.itemList[index];
+                        //       return BagCard(
+                        //           product: BagModel(
+                        //               productName: bagItem.name,
+                        //               prductColor: bagItem.colors[0],
+                        //               productSize: bagItem.size[0],
+                        //               prodctQuantity: 1,
+                        //               productPrice: bagItem.price,
+                        //               productImg: bagItem.imageURL[0]));
+                        //     },
+                        //   );
+                        // }),
                         Center(
                           child: Container(
                             margin:

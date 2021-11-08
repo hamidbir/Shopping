@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/auth_controller.dart';
+import 'package:shopping_shoe/model/bag_model.dart';
 import 'package:shopping_shoe/model/shoe.dart';
 import 'package:shopping_shoe/repository/cloud_function.dart';
 import 'package:shopping_shoe/utils/map_function.dart';
@@ -52,21 +53,29 @@ class ShoeCardController extends GetxController {
 
   Future/*<bool>*/ addToCart() async {
     isLoading.value = true;
-    Map<String, dynamic> productMap = {
-      'id': shoe.id,
-      'name': shoe.name,
-      // 'brand': shoe.brand,
-      // 'category': shoe.category,
-      'imageURL': listToMap(shoe.imageURL),
-      'price': shoe.price,
-      'color': listToMap([selectedColor.value]),
-      'size': listToMap([selectedSize.value]),
-      // 'description': shoe.description,
-      // 'rating': shoe.rating,
-    };
+    BagModel bag = BagModel(
+        shoeId: shoe.id,
+        shoeName: shoe.name,
+        shoeColor: selectedColor.value,
+        shoeSize: selectedSize.value,
+        shoeImg: shoe.imageURL[0],
+        shoePrice: shoe.price);
 
-    // await CloudFunction()
-    //     .addToCart(authController.userId /*Storage().getUid()*/, productMap);
+    // Map<String, dynamic> productMap = {
+    //   'id': shoe.id,
+    //   'name': shoe.name,
+    //   // 'brand': shoe.brand,
+    //   // 'category': shoe.category,
+    //   'imageURL': listToMap(shoe.imageURL),
+    //   'price': shoe.price,
+    //   'color': selectedColor.value,
+    //   'size': selectedSize.value,
+    //   // 'description': shoe.description,
+    //   // 'rating': shoe.rating,
+    // };
+
+    await CloudFunction()
+        .addToCart(auth.userId /*Storage().getUid()*/, bag.toMap());
     //await bagController.fetchBagItem();
     // await favouritesController.fetchFavData();
     addedToCart.value = true;

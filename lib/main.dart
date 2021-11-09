@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:shopping_shoe/view/pages/admin_panel.dart';
 import 'package:shopping_shoe/view/pages/auth/login.dart';
 import 'package:shopping_shoe/view/pages/main_screen.dart';
+import 'package:shopping_shoe/view/pages/trend_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'MainFont',
                 primarySwatch: Colors.cyan,
               ),
-              home: Login());
+              home: //const TrendView(),
+                  Login());
           //const MainScreen()); //const LandingPage()), // AdminPanel()),
         });
   }

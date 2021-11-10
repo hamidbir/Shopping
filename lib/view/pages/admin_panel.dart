@@ -211,10 +211,9 @@ class AdminPanel extends StatelessWidget {
                                           await showDialog(
                                               context: context,
                                               builder: (context) =>
-                                                  _showCategoryList(
-                                                      context,
-                                                      size,
-                                                      Constants.shoeColorList));
+                                                  _showCategoryList(context,
+                                                      size, Constants.colorShoe,
+                                                      color: true));
                                           //adminController.addColor();
                                         },
                                         maxLength: 100),
@@ -232,14 +231,17 @@ class AdminPanel extends StatelessWidget {
                                                 return Padding(
                                                   padding:
                                                       const EdgeInsets.all(3.0),
-                                                  child: Chip(
-                                                      onDeleted: () {
-                                                        adminController
-                                                            .removeColor(index);
-                                                      },
-                                                      label: Text(
-                                                          adminController
+                                                  child: CircleAvatar(
+                                                    radius: 19,
+                                                    backgroundColor:
+                                                        Colors.black,
+                                                    child: CircleAvatar(
+                                                      radius: 17,
+                                                      backgroundColor: Color(int
+                                                          .parse(adminController
                                                               .colors[index])),
+                                                    ),
+                                                  ),
                                                 );
                                               })),
                                     ),
@@ -292,7 +294,8 @@ class AdminPanel extends StatelessWidget {
         }));
   }
 
-  Widget _showCategoryList(BuildContext context, Size size, List<String> list) {
+  Widget _showCategoryList(BuildContext context, Size size, List<String> list,
+      {bool color = false}) {
     final AdminController admin = Get.find();
     return AlertDialog(
         actions: [
@@ -307,28 +310,56 @@ class AdminPanel extends StatelessWidget {
             style: TextStyle(color: Colors.pink, fontSize: 22)),
         content: SizedBox(
           width: size.width * 0.9,
-          child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: list.length, // Constants.taskCategoryList.length,
-              itemBuilder: (ctx, index) {
-                return InkWell(
-                  onTap: () {
-                    if (list == Constants.taskCategoryList) {
-                      admin.addCategory(index);
-                    } else {
-                      admin.addColor(index);
-                    }
-                    Navigator.of(context).pop();
-                  },
-                  child: ListTile(
-                    leading: const Icon(Icons.access_alarm, color: Colors.pink),
-                    title: Text(
-                      list[index],
-                      style: const TextStyle(color: Colors.indigoAccent),
-                    ),
+          child: color
+              ? GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 8,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 8,
                   ),
-                );
-              }),
+                  itemCount: list.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      hoverColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        admin.addColor(index);
+                        Navigator.of(context).pop();
+                      },
+                      child: CircleAvatar(
+                        radius: 19,
+                        backgroundColor: Colors.black,
+                        child: CircleAvatar(
+                          radius: 17,
+                          backgroundColor: Color(int.parse(list[index])),
+                        ),
+                      ),
+                    );
+                  },
+                )
+              : ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: list.length, // Constants.taskCategoryList.length,
+                  itemBuilder: (ctx, index) {
+                    return InkWell(
+                      onTap: () {
+                        admin.addCategory(index);
+
+                        Navigator.of(context).pop();
+                      },
+                      child: ListTile(
+                        leading:
+                            const Icon(Icons.access_alarm, color: Colors.pink),
+                        title: Text(
+                          list[index],
+                          style: const TextStyle(color: Colors.indigoAccent),
+                        ),
+                      ),
+                    );
+                  }),
         ));
   }
 

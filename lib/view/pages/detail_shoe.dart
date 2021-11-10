@@ -46,7 +46,7 @@ class DetailShoe extends StatelessWidget {
                         height: MediaQuery.of(context).size.height,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          //color: color,
+                          color: Color(int.parse(shoeControll.shoe.colors[0])),
                           image: DecorationImage(
                             image: NetworkImage(shoeControll.shoe.imageURL[0]),
                             fit: BoxFit.cover,

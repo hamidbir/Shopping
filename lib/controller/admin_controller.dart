@@ -53,48 +53,10 @@ class AdminController extends GetxController {
   }
 
   void addColor(int index) {
-    currentColor.value = Constants.shoeColorList[index];
-    shoeColorConteroller.text = currentColor.value;
-    switch (index) {
-      case 0:
-        colorsSave.add(Colors.red.value.toString());
-        break;
-      case 1:
-        colorsSave.add(Colors.blue.value.toString());
-        break;
-      case 2:
-        colorsSave.add(Colors.black.value.toString());
-        break;
-      case 3:
-        colorsSave.add(Colors.brown.value.toString());
-        break;
-      case 4:
-        colorsSave.add(Colors.green.value.toString());
-        break;
-      case 5:
-        colorsSave.add(Colors.grey.value.toString());
-        break;
-      case 6:
-        colorsSave.add(Colors.yellow.value.toString());
-        break;
-      case 7:
-        colorsSave.add(Colors.purple.value.toString());
-        break;
-      case 8:
-        colorsSave.add(Colors.pink.value.toString());
-        break;
-      case 9:
-        colorsSave.add(Colors.orange.value.toString());
-        break;
-      case 10:
-        colorsSave.add(Colors.cyan.value.toString());
-        break;
-      // case 11:
-      //   colorsSave.add(Colors.red.value.toString());
-      //   break;
-      default:
-    }
-    colors.add(shoeColorConteroller.text);
+    currentColor.value = Constants.colorShoe[index];
+
+    colorsSave.add(currentColor.value);
+    colors.add(currentColor.value);
     //colorsSave.add(shoeColorConteroller.text);
   }
 
@@ -183,6 +145,8 @@ class AdminController extends GetxController {
         'colors': listToMap(colorsSave),
         'size': listToMap(sizesSave),
         'description': 'shoe is good',
+        'view': 5,
+        'number': 10
         //'rating': '10',
       };
       await CloudFunction().saveNewShoe(shoeMap, id /* Storage().getUid()*/);

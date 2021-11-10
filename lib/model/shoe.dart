@@ -12,6 +12,10 @@ class Shoe {
   final List<String> colors;
   final List<String> size;
   final String description;
+  //-------------------------------
+  int view;
+  final int number;
+
   var isFav = 'Idle'.obs;
   //final double rating;
 
@@ -25,21 +29,25 @@ class Shoe {
     required this.colors,
     required this.size,
     required this.description,
+    this.view = 0,
+    this.number = 0,
     //required this.rating
   });
   factory Shoe.fromMap(/*Map<String, dynamic>*/ var map) {
     return Shoe(
-      id: map['id'],
-      name: map['name'],
-      //  brand: map['brand'],
-      category: listFromMap(map['category']),
-      imageURL: listFromMap(map['imageURL']),
-      price: map['price'],
-      colors: listFromMap(map['colors']),
-      size: listFromMap(map['size']),
-      description: map['description'],
-      //rating: map['rating'].toDouble(),
-    );
+        id: map['id'],
+        name: map['name'],
+        //  brand: map['brand'],
+        category: listFromMap(map['category']),
+        imageURL: listFromMap(map['imageURL']),
+        price: map['price'],
+        colors: listFromMap(map['colors']),
+        size: listFromMap(map['size']),
+        description: map['description'],
+        view: map['view'],
+        number: map['number']
+        //rating: map['rating'].toDouble(),
+        );
   }
   Map<String, dynamic> toMap() {
     return {
@@ -52,6 +60,8 @@ class Shoe {
       'colors': listToMap(colors),
       'size': listToMap(size),
       'description': description,
+      'view': view,
+      'number': number,
       //'rating': rating,
     };
   }

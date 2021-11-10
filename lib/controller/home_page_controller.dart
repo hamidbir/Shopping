@@ -30,6 +30,7 @@ class HomePageController extends GetxController {
   Future fetchHomePageData({bool forceLoad = false}) async {
     if (forceLoad) {
       newShoeList.clear();
+      trendList.clear();
     }
     if (newShoeList.isEmpty) {
       isLoading.value = true;
@@ -42,15 +43,17 @@ class HomePageController extends GetxController {
         // final List<QueryDocumentSnapshot> resultTrend =
         //     await CloudFunction().getTrend();
         newShoeList.clear();
-        //trendList.clear();
+        trendList.clear();
 
         for (int i = 0; i < resultNew.length; i++) {
           Shoe shoe = Shoe.fromMap(resultNew[i]);
-
+          //-- chck view greather than 50 add to trend list
+          if (shoe.view >= 50) {
+            trendList.add(shoe);
+          }
           if (fav.favList.isNotEmpty) {
             for (Shoe item in fav.favList) {
               if (shoe.id == item.id) {
-                print('Hamid ${shoe.name}');
                 shoe.isFav.value = 'Like';
                 break;
               }

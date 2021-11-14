@@ -81,4 +81,8 @@ class ShoeCardController extends GetxController {
     addedToCart.value = true;
     isLoading.value = false;
   }
+
+  void updateShoe() async {
+    await CloudFunction().updateViewShoe(shoe.toMap(), shoe.id);
+  }
 }

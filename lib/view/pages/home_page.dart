@@ -28,8 +28,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final HomePageController homeControll = Get.put(HomePageController());
-    ShoeCardController shoeControll = Get.put(ShoeCardController());
+    final HomePageController homeControll = Get.find();
+
     return SafeArea(child: Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Colors.transparent,
@@ -153,6 +153,8 @@ class HomePage extends StatelessWidget {
             homeControll.newShoeList[index].size.first;
         shoeControll.selectedColor.value =
             homeControll.newShoeList[index].colors.first;
+        shoe.view++;
+        shoeControll.updateShoe();
         //shoeControll.favManage.value = 'Idle';
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const DetailShoe()));
@@ -167,20 +169,20 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           margin: const EdgeInsets.only(bottom: 20),
           decoration: BoxDecoration(
-            // color: ,
-            borderRadius: BorderRadius.circular(20),
-            image: DecorationImage(
-              image: NetworkImage(shoe.imageURL[0]),
-              //AssetImage('images/shoe2.jpg'),
-              fit: BoxFit.cover,
-            ),
-            boxShadow: const [
-              BoxShadow(
-                  color: ColorConstants.grey,
-                  blurRadius: 10,
-                  offset: Offset(0, 10))
-            ],
-          ),
+              // color: ,
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                image: NetworkImage(shoe.imageURL[0]),
+                //AssetImage('images/shoe2.jpg'),
+                fit: BoxFit.cover,
+              ),
+              boxShadow: const [
+                BoxShadow(
+                    color: ColorConstants.grey,
+                    blurRadius: 10,
+                    offset: Offset(0, 10))
+              ],
+              color: Color(int.parse(shoe.colors[0]))),
           child: Stack(
             children: [
               Align(

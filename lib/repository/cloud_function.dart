@@ -8,8 +8,7 @@ class CloudFunction {
   static final CollectionReference users = firebaseIns.collection('users');
   static final CollectionReference category =
       firebaseIns.collection('category');
-  static final CollectionReference newProduct =
-      firebaseIns.collection('newproduct');
+  static final CollectionReference newProduct = firebaseIns.collection('shoes');
   static final CollectionReference trending =
       firebaseIns.collection('trending');
   static final CollectionReference banners = firebaseIns.collection('banners');
@@ -25,6 +24,10 @@ class CloudFunction {
   }
 
   Future<void> saveNewShoe(Map<String, dynamic> shoe, String uid) async {
+    await newProduct.doc(uid).set(shoe);
+  }
+
+  Future<void> updateViewShoe(Map<String, dynamic> shoe, String uid) async {
     await newProduct.doc(uid).set(shoe);
   }
 

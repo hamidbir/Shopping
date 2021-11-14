@@ -24,13 +24,13 @@ class FavController extends GetxController {
 
       favList.clear();
       for (int i = 0; i < favResult.length; i++) {
-        print(favResult[i].data());
+        //print(favResult[i].data());
         Shoe shoe = Shoe.fromMap(favResult[i]);
 
         favList.add(shoe);
       }
       // print('fav1 ${favList[0].runtimeType}');
-      print('fav1 ${favList}');
+      //  print('fav1 ${favList}');
     } on Exception {
       isNetError.value = true;
     } catch (e) {

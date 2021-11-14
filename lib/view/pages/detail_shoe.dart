@@ -127,9 +127,13 @@ class DetailShoe extends StatelessWidget {
                               width: MediaQuery.of(context).size.width / 3,
                               //height: double.infinity / 2,
                               decoration: BoxDecoration(
-                                color: Color(
-                                        int.parse(shoeControll.shoe.colors[0]))
-                                    .withOpacity(0.5),
+                                color: identical(
+                                        int.parse(shoeControll.shoe.colors[0]),
+                                        Colors.white.value)
+                                    ? Colors.lightBlue.shade50
+                                    : Color(int.parse(
+                                            shoeControll.shoe.colors[0]))
+                                        .withOpacity(0.5),
                               ),
                               child: Column(
                                 //crossAxisAlignment: CrossAxisAlignment.center,
@@ -139,18 +143,40 @@ class DetailShoe extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(shoeControll.shoe.name,
-                                        style: const TextStyle(
-                                            fontSize: 40,
-                                            fontWeight: FontWeight.bold,
-                                            color: ColorConstants.white)),
+                                        style: TextStyle(
+                                          fontSize: 40,
+                                          fontWeight: FontWeight.bold,
+                                          color: (identical(
+                                                      int.parse(shoeControll
+                                                          .shoe.colors[0]),
+                                                      Colors.white.value) ||
+                                                  identical(
+                                                      int.parse(shoeControll
+                                                          .shoe.colors[0]),
+                                                      Colors.yellow.value))
+                                              //trendShoe[index].colors[0] == '4294967295'
+                                              ? Colors.black
+                                              : Colors.white,
+                                        )),
                                   ),
                                   const SizedBox(height: 25),
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Text('سایز',
                                         style: TextStyle(
-                                            fontSize: 20,
-                                            color: ColorConstants.white)),
+                                          fontSize: 20,
+                                          color: (identical(
+                                                      int.parse(shoeControll
+                                                          .shoe.colors[0]),
+                                                      Colors.white.value) ||
+                                                  identical(
+                                                      int.parse(shoeControll
+                                                          .shoe.colors[0]),
+                                                      Colors.yellow.value))
+                                              //trendShoe[index].colors[0] == '4294967295'
+                                              ? Colors.black
+                                              : Colors.white,
+                                        )),
                                   ),
                                   SizedBox(
                                     height: 80,
@@ -205,12 +231,23 @@ class DetailShoe extends StatelessWidget {
                                       },
                                     ),
                                   ),
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Text('رنگ',
                                         style: TextStyle(
-                                            fontSize: 20,
-                                            color: ColorConstants.white)),
+                                          fontSize: 20,
+                                          color: (identical(
+                                                      int.parse(shoeControll
+                                                          .shoe.colors[0]),
+                                                      Colors.white.value) ||
+                                                  identical(
+                                                      int.parse(shoeControll
+                                                          .shoe.colors[0]),
+                                                      Colors.yellow.value))
+                                              //trendShoe[index].colors[0] == '4294967295'
+                                              ? Colors.black
+                                              : Colors.white,
+                                        )),
                                   ),
                                   const SizedBox(
                                     height: 5,
@@ -275,11 +312,29 @@ class DetailShoe extends StatelessWidget {
                                           child: Center(
                                             child: Text(
                                                 '${shoeControll.shoe.price} تومان',
-                                                style: const TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                    color:
-                                                        ColorConstants.white)),
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: (identical(
+                                                              int.parse(
+                                                                  shoeControll
+                                                                          .shoe
+                                                                          .colors[
+                                                                      0]),
+                                                              Colors.white
+                                                                  .value) ||
+                                                          identical(
+                                                              int.parse(
+                                                                  shoeControll
+                                                                          .shoe
+                                                                          .colors[
+                                                                      0]),
+                                                              Colors.yellow
+                                                                  .value))
+                                                      //trendShoe[index].colors[0] == '4294967295'
+                                                      ? Colors.black
+                                                      : Colors.white,
+                                                )),
                                           ),
                                         ),
                                       ),

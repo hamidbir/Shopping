@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final HomePageController homeControll = Get.put(HomePageController());
+    final HomePageController homeControll = Get.find();
 
     return SafeArea(child: Scaffold(
       // appBar: AppBar(

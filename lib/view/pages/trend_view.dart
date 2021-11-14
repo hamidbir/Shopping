@@ -1,104 +1,72 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shopping_shoe/controller/home_page_controller.dart';
 import 'package:shopping_shoe/controller/shoe_card_controller.dart';
 import 'package:shopping_shoe/model/shoe.dart';
 import 'package:shopping_shoe/utils/color_const.dart';
-
-List<Shoe> trendShoe = [
-  Shoe(
-      id: '1',
-      name: 'کفش یک ',
-      category: ['مجلسی', 'زنانه'],
-      imageURL: ['assets/images/s1.png'],
-      price: 210000.toString(),
-      colors: ['4278190080'],
-      size: ['39', '40'],
-      description: 'good'),
-  Shoe(
-      id: '2',
-      name: 'کفش دو',
-      category: ['مجلسی', 'زنانه'],
-      imageURL: ['assets/images/s2.png'],
-      price: 210000.toString(),
-      colors: ['4293467747'],
-      size: ['39', '40'],
-      description: 'good'),
-  Shoe(
-      id: '3',
-      name: 'کفش سه',
-      category: ['مجلسی', 'زنانه'],
-      imageURL: ['assets/images/s3.png'],
-      price: 210000.toString(),
-      colors: ['4288423856'],
-      size: ['39', '40'],
-      description: 'good'),
-  Shoe(
-      id: '4',
-      name: 'کفش چهار',
-      category: ['مجلسی', 'زنانه'],
-      imageURL: ['assets/images/s5.png'],
-      price: 210000.toString(),
-      colors: [Colors.blue.value.toString()],
-      size: ['39', '40'],
-      description: 'good'),
-  Shoe(
-      id: '5',
-      name: 'کفش پنج',
-      category: ['مجلسی', 'زنانه'],
-      imageURL: ['assets/images/s4.png'],
-      price: 210000.toString(),
-      colors: ['4294967295'],
-      size: ['39', '40'],
-      description: 'good'),
-  Shoe(
-      id: '6',
-      name: 'کفش شش',
-      category: ['مجلسی', 'زنانه'],
-      imageURL: ['assets/images/s6.png'],
-      price: 210000.toString(),
-      colors: [Colors.blue.value.toString()],
-      size: ['39', '40'],
-      description: 'good'),
-];
+import 'package:shopping_shoe/view/pages/detail_shoe.dart';
 
 class TrendView extends StatelessWidget {
   const TrendView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    HomePageController homeControll = Get.find();
+    ShoeCardController shoeControll = Get.find();
     return SizedBox(
       height: 350,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemCount: trendShoe.length,
-          itemBuilder: (context, index) {
-            return Container(
-              width: 200,
-              margin: const EdgeInsets.only(right: 16),
-              child: Stack(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 50.0),
-                    child: _buildBackground(index),
+      child: Obx(() {
+        return ListView.builder(
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            itemCount: homeControll.trendList.length,
+            itemBuilder: (context, index) {
+              return InkWell(
+                hoverColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () {
+                  shoeControll.shoe = homeControll.trendList[index];
+                  shoeControll.selectedSize.value =
+                      homeControll.trendList[index].size.first;
+                  shoeControll.selectedColor.value =
+                      homeControll.trendList[index].colors.first;
+                  homeControll.trendList[index].view++;
+                  shoeControll.updateShoe();
+                  //shoeControll.favManage.value = 'Idle';
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const DetailShoe()));
+                },
+                child: Container(
+                  width: 200,
+                  margin: const EdgeInsets.only(right: 16),
+                  child: Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 50.0),
+                        child: _buildBackground(homeControll.trendList[index]),
+                      ),
+                      Positioned(
+                          bottom: 80,
+                          right: 10,
+                          child: SizedBox(
+                              width: 150,
+                              height: 150,
+                              child: Image.network(
+                                  homeControll.trendList[index].imageURL[0]))),
+                    ],
                   ),
-                  Positioned(
-                      bottom: 80,
-                      right: 10,
-                      child: SizedBox(
-                          width: 150,
-                          height: 150,
-                          child: Image.asset(trendShoe[index].imageURL[0]))),
-                ],
-              ),
-            );
-          }),
+                ),
+              );
+            });
+      }),
     );
   }
 
-  Widget _buildBackground(int index) {
+  Widget _buildBackground(Shoe shoe) {
     ShoeCardController shoeControll = Get.find();
 
     return ClipPath(
@@ -112,11 +80,10 @@ class TrendView extends StatelessWidget {
         //         ? 1
         //         : 0.5,
         //     color: Colors.black)),
-        width: 200,
-        color:
-            identical(int.parse(trendShoe[index].colors[0]), Colors.white.value)
-                ? Colors.lightBlue.shade50
-                : Color(int.parse(trendShoe[index].colors[0])),
+        width: 250,
+        color: identical(int.parse(shoe.colors[0]), Colors.white.value)
+            ? Colors.lightBlue.shade50
+            : Color(int.parse(shoe.colors[0])),
         child: Stack(
           children: [
             Padding(
@@ -125,29 +92,33 @@ class TrendView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(Icons.shower, size: 40, color: Colors.white),
+                  // const Icon(Icons.shower, size: 40, color: Colors.white),
                   const Expanded(child: SizedBox()),
                   Container(
-                    width: 125,
-                    padding: const EdgeInsets.only(right: 22.0),
-                    child: Text(trendShoe[index].name,
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: Text(shoe.name,
+                        textAlign: TextAlign.end,
+                        maxLines: 2,
                         style: TextStyle(
-                            color: identical(
-                                    int.parse(trendShoe[index].colors[0]),
-                                    Colors.white.value)
-                                //trendShoe[index].colors[0] == '4294967295'
-                                ? Colors.black
-                                : Colors.white,
-                            fontSize: 22)),
+                          color: (identical(int.parse(shoe.colors[0]),
+                                      Colors.white.value) ||
+                                  identical(int.parse(shoe.colors[0]),
+                                      Colors.yellow.value))
+                              //trendShoe[index].colors[0] == '4294967295'
+                              ? Colors.black
+                              : Colors.white,
+                          fontSize: 22,
+                        )),
                   ),
                   const SizedBox(height: 8.0),
                   Padding(
                     padding: const EdgeInsets.only(right: 22.0),
-                    child: Text(trendShoe[index].price,
+                    child: Text(shoe.price,
                         style: TextStyle(
-                            color: identical(
-                                    int.parse(trendShoe[index].colors[0]),
-                                    Colors.white.value)
+                            color: (identical(int.parse(shoe.colors[0]),
+                                        Colors.white.value) ||
+                                    identical(int.parse(shoe.colors[0]),
+                                        Colors.yellow.value))
                                 //Color(int.parse(trendShoe[index].colors[0])) == Colors.white.value
                                 ? Colors.black
                                 : Colors.white,
@@ -166,7 +137,7 @@ class TrendView extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
                     onTap: () {
-                      shoeControll.shoe = trendShoe[index];
+                      shoeControll.shoe = shoe;
                       shoeControll.cFav();
                     },
                     child: Container(
@@ -181,7 +152,7 @@ class TrendView extends StatelessWidget {
                         'assets/Like.flr',
                         alignment: Alignment.center,
                         fit: BoxFit.contain,
-                        animation: trendShoe[index].isFav.value,
+                        animation: shoe.isFav.value,
                       )),
                     ),
                   ),

@@ -48,6 +48,7 @@ class HomePageController extends GetxController {
         for (int i = 0; i < resultNew.length; i++) {
           Shoe shoe = Shoe.fromMap(resultNew[i]);
           //-- chck view greather than 50 add to trend list
+
           if (shoe.view >= 50) {
             trendList.add(shoe);
           }

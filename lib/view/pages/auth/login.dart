@@ -6,6 +6,7 @@ import 'package:shopping_shoe/controller/auth_controller.dart';
 import 'package:shopping_shoe/utils/color_const.dart';
 import 'package:shopping_shoe/view/pages/admin_panel.dart';
 import 'package:shopping_shoe/view/pages/auth/sign_up.dart';
+import 'package:shopping_shoe/view/pages/cart_screen.dart';
 import 'package:shopping_shoe/view/pages/home_page.dart';
 import 'package:shopping_shoe/view/pages/main_screen.dart';
 
@@ -139,7 +140,7 @@ class Login extends StatelessWidget {
                                     await authController.signIn()
                                         ? authController.getAdmin()
                                             ? Get.offAll(AdminPanel())
-                                            : Get.offAll(const MainScreen())
+                                            : Get.offAll(const CartScreen())
                                         : Get.snackbar(authFail,
                                             authController.errorText.value);
                                   },

@@ -135,6 +135,7 @@ class DetailShoe extends StatelessWidget {
                                             shoeControll.shoe.colors[0]))
                                         .withOpacity(0.5),
                               ),
+                              
                               child: Column(
                                 //crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,

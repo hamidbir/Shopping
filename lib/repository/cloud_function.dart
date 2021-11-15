@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shopping_shoe/model/bag_model.dart';
 import 'package:shopping_shoe/model/shoe.dart';
 import 'package:shopping_shoe/utils/storage.dart';
 
@@ -84,6 +85,26 @@ class CloudFunction {
         users
             .doc(uid)
             .collection('favorites')
+            .doc(element.id)
+            .delete()
+            .then((value) => print('Success'));
+      });
+    });
+  }
+
+  Future<void> delAsCart(BagModel shoe, String uid) async {
+    //final uid = Storage().getUid();
+
+    await users
+        .doc(uid)
+        .collection('cart')
+        .where('id', isEqualTo: shoe.shoeId)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        users
+            .doc(uid)
+            .collection('cart')
             .doc(element.id)
             .delete()
             .then((value) => print('Success'));

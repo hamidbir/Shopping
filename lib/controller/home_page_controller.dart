@@ -13,6 +13,7 @@ class HomePageController extends GetxController {
   var newShoeList = <Shoe>[].obs;
   var trendList = <Shoe>[].obs;
   var bannerList = <String>[].obs;
+
   @override
   void onReady() {
     super.onReady();

@@ -76,7 +76,11 @@ flutter:
     - family: MainFont
       fonts:
         - asset: assets/fonts/ParsiFont.TTF
-        - asset: assets/fonts/EnglishFont.TTF
+        #- asset: assets/fonts/EnglishFont.TTF
+    - family: EFont
+      fonts:
+        #- asset: assets/fonts/ParsiFont.TTF
+        - asset: assets/fonts/EnglishFont.TTF    
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

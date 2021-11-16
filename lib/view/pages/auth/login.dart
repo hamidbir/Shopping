@@ -1,13 +1,12 @@
 import 'dart:ui';
 
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/auth_controller.dart';
 import 'package:shopping_shoe/utils/color_const.dart';
 import 'package:shopping_shoe/view/pages/admin_panel.dart';
 import 'package:shopping_shoe/view/pages/auth/sign_up.dart';
-import 'package:shopping_shoe/view/pages/cart_screen.dart';
-import 'package:shopping_shoe/view/pages/home_page.dart';
 import 'package:shopping_shoe/view/pages/main_screen.dart';
 
 class Login extends StatelessWidget {
@@ -47,11 +46,11 @@ class Login extends StatelessWidget {
     final AuthController authController = Get.put(AuthController());
     return Scaffold(body: SafeArea(child: Obx(() {
       return authController.isLoading.value
-          ? const Center(child: CircularProgressIndicator())
+          ? showLoading(context)
           : Stack(
               children: [
-                Image.network(
-                  'https://www.wallpaperup.com/uploads/wallpapers/2015/02/12/620597/cd4fcf4cf8534583a2ad4446ba926235-700.jpg',
+                Image.asset(
+                  'assets/images/back4.jpg',
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: double.infinity,
@@ -60,10 +59,10 @@ class Login extends StatelessWidget {
                 Center(
                   child: ClipRect(
                     child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),
+                      filter: ImageFilter.blur(sigmaX: 0.7, sigmaY: 0.7),
                       child: Container(
                         width: 400,
-                        height: 350,
+                        height: 400,
                         decoration: BoxDecoration(
                           color: Colors.grey.shade200.withOpacity(0.5),
                         ),
@@ -77,18 +76,18 @@ class Login extends StatelessWidget {
                               const Text(
                                 login,
                                 style: TextStyle(
-                                    fontSize: 22,
+                                    fontSize: 32,
                                     fontWeight: FontWeight.bold,
                                     color: ColorConstants.dark),
                               ),
                               InkWell(
                                 onTap: () {
-                                  Get.offAll(const SignUp());
+                                  Get.offAll(SignUp());
                                 },
                                 child: const Text(
                                   signUp,
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                       color: ColorConstants.dark),
                                 ),
@@ -101,6 +100,8 @@ class Login extends StatelessWidget {
                                   textInputAction: TextInputAction.next,
                                   controller: authController.emailController,
                                   cursorColor: ColorConstants.white,
+                                  style: const TextStyle(
+                                      fontFamilyFallback: ['EFont']),
                                   decoration: const InputDecoration(
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(width: 0.0),
@@ -114,7 +115,10 @@ class Login extends StatelessWidget {
                                             color: ColorConstants.primary,
                                             width: 0.0),
                                       ))),
+                              const SizedBox(height: 5),
                               TextField(
+                                  style: const TextStyle(
+                                      fontFamilyFallback: ['EFont']),
                                   focusNode: passNode,
                                   textInputAction: TextInputAction.next,
                                   obscureText: true,
@@ -135,16 +139,26 @@ class Login extends StatelessWidget {
                                             color: ColorConstants.primary,
                                             width: 0.0),
                                       ))),
-                              ElevatedButton(
-                                  onPressed: () async {
-                                    await authController.signIn()
-                                        ? authController.getAdmin()
-                                            ? Get.offAll(AdminPanel())
-                                            : Get.offAll(const CartScreen())
-                                        : Get.snackbar(authFail,
-                                            authController.errorText.value);
-                                  },
-                                  child: const Text(login))
+                              const SizedBox(height: 10),
+                              SizedBox(
+                                height: 55,
+                                child: ElevatedButton(
+                                    onPressed: () async {
+                                      await authController.signIn()
+                                          ? authController.getAdmin()
+                                              ? Get.offAll(AdminPanel())
+                                              : Get.offAll(const MainScreen())
+                                          : Get.snackbar(authFail,
+                                              authController.errorText.value);
+                                    },
+                                    child: const Text(
+                                      login,
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold,
+                                          color: ColorConstants.dark),
+                                    )),
+                              )
                             ],
                           ),
                         )),
@@ -156,4 +170,18 @@ class Login extends StatelessWidget {
             );
     })));
   }
+}
+
+Widget showLoading(BuildContext context) {
+  Future.delayed(
+      Duration.zero,
+      () => showDialog(
+          context: context,
+          builder: (_) => const Dialog(
+              backgroundColor: Colors.transparent,
+              child: FlareActor(
+                'assets/loading.flr',
+                animation: 'walking',
+              ))));
+  return const SizedBox();
 }

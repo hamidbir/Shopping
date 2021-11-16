@@ -9,14 +9,9 @@ import 'package:shopping_shoe/view/pages/home_page.dart';
 import 'package:shopping_shoe/view/pages/landing_page.dart';
 import 'package:shopping_shoe/view/pages/upload_shoe_screen.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class SignUp extends StatelessWidget {
+  SignUp({Key? key}) : super(key: key);
 
-  @override
-  State<SignUp> createState() => _SignUpState();
-}
-
-class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
   static const String login = ' ثبت نام کرده اید؟ ورود';
   static const String signUp = 'ثبت نام';
   static const String nameHint = 'نام کاربری';
@@ -26,22 +21,6 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
   static FocusNode nameNode = FocusNode();
   static FocusNode emailNode = FocusNode();
   static FocusNode passNode = FocusNode();
-  late AnimationController animationController;
-  late Animation animation;
-
-  @override
-  void initState() {
-    animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 20));
-    animation =
-        CurvedAnimation(parent: animationController, curve: Curves.linear)
-          ..addListener(() {
-            setState(() {});
-          })
-          ..addStatusListener((animStatus) {});
-    animationController.repeat(reverse: true);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +30,11 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
           ? const Center(child: CircularProgressIndicator())
           : Stack(
               children: [
-                Image.network(
-                  'https://www.wallpaperup.com/uploads/wallpapers/2015/02/12/620597/cd4fcf4cf8534583a2ad4446ba926235-700.jpg',
+                Image.asset(
+                  'assets/images/back4.jpg',
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: double.infinity,
-                  alignment: FractionalOffset(animation.value, 0),
                 ),
                 Center(
                   child: ClipRect(
@@ -64,7 +42,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
                       filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),
                       child: Container(
                         width: 400,
-                        height: 350,
+                        height: 500,
                         decoration: BoxDecoration(
                           color: Colors.grey.shade200.withOpacity(0.5),
                         ),
@@ -78,7 +56,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
                               const Text(
                                 signUp,
                                 style: TextStyle(
-                                    fontSize: 22,
+                                    fontSize: 32,
                                     fontWeight: FontWeight.bold,
                                     color: ColorConstants.dark),
                               ),
@@ -90,7 +68,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
                                 child: const Text(
                                   login,
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                       color: ColorConstants.dark),
                                 ),
@@ -163,14 +141,23 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
                                     // )
                                   )),
                               const SizedBox(height: 20),
-                              ElevatedButton(
-                                  onPressed: () async {
-                                    await authController.signUp()
-                                        ? Get.offAll(const LandingPage())
-                                        : Get.snackbar(authFail,
-                                            authController.errorText.value);
-                                  },
-                                  child: const Text(signUp))
+                              SizedBox(
+                                height: 55,
+                                child: ElevatedButton(
+                                    onPressed: () async {
+                                      await authController.signUp()
+                                          ? Get.offAll(const LandingPage())
+                                          : Get.snackbar(authFail,
+                                              authController.errorText.value);
+                                    },
+                                    child: const Text(
+                                      signUp,
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold,
+                                          color: ColorConstants.dark),
+                                    )),
+                              )
                             ],
                           ),
                         )),

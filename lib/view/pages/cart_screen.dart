@@ -6,6 +6,7 @@ import 'package:shopping_shoe/controller/shoe_card_controller.dart';
 import 'package:shopping_shoe/model/bag_model.dart';
 import 'package:shopping_shoe/model/shoe.dart';
 import 'package:shopping_shoe/utils/color_const.dart';
+import 'package:shopping_shoe/view/pages/auth/login.dart';
 import 'package:shopping_shoe/view/pages/trend_view.dart';
 
 class CartScreen extends StatelessWidget {
@@ -22,9 +23,10 @@ class CartScreen extends StatelessWidget {
           color: Colors.yellow,
           child: Obx(() {
             if (bagControll.isLoading.value) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return showLoading(context);
+              // const Center(
+              //   child: CircularProgressIndicator(),
+              // );
             } else {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,

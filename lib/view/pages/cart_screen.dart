@@ -24,55 +24,63 @@ class CartScreen extends StatelessWidget {
               child: Container(
             color: Colors.yellow,
             child: Obx(() {
-              if (bagControll.isLoading.value) {
-                return Center(
-                  child: Container(
-                      color: Colors.red,
-                      width: 150,
-                      height: 150,
-                      child: const FlareActor(
-                        'assets/loading.flr',
-                        animation: 'walking',
-                      )),
-                );
-              } else {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text('مجموع:',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 28)),
-                    Text(bagControll.totalPrice.value.toString(),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 28)),
-                    Container(
-                      width: 350,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          color: Colors.blueAccent,
-                          borderRadius: BorderRadiusDirectional.circular(15)),
-                      child: const Center(
-                        child: Text('پرداخت',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: Colors.white,
-                            )),
-                      ),
+              // if (bagControll.isLoading.value) {
+              //   return Center(
+              //     child: Container(
+              //         color: Colors.transparent,
+              //         width: 250,
+              //         height: 250,
+              //         child: const FlareActor(
+              //           'assets/shoe.flr',
+              //           animation: 'on',
+              //         )),
+              //   );
+              // } else {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text('مجموع:',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 28)),
+                  Text(bagControll.totalPrice.value.toString(),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 28)),
+                  Container(
+                    width: 350,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: Colors.blueAccent,
+                        borderRadius: BorderRadiusDirectional.circular(15)),
+                    child: const Center(
+                      child: Text('پرداخت',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Colors.white,
+                          )),
                     ),
-                  ],
-                );
-              }
-            }),
+                  ),
+                ],
+              );
+            }
+//            }
+                ),
           )),
           Expanded(
               child: SizedBox(
                   height: double.infinity,
                   child: Obx(() {
                     if (bagControll.isLoading.value) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
+                      return Center(
+                        child: Container(
+                            color: Colors.transparent,
+                            width: 250,
+                            height: 250,
+                            child: const FlareActor(
+                              'assets/shoe.flr',
+                              animation: 'on',
+                            )),
                       );
                     } else {
                       return SizedBox(

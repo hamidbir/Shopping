@@ -123,7 +123,7 @@ class HomePage extends StatelessWidget {
                         GridView.builder(
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
+                            crossAxisCount: 4,
                             mainAxisSpacing: 16,
                             crossAxisSpacing: 8,
                           ),
@@ -162,138 +162,135 @@ class HomePage extends StatelessWidget {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const DetailShoe()));
       },
-      child: Hero(
-        tag: shoe.id,
-        child: Container(
-          height: 250,
-          // width: double.infinity,
-          padding: const EdgeInsets.all(20),
-          margin: const EdgeInsets.only(bottom: 20),
-          decoration: BoxDecoration(
-              // color: ,
-              borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(
-                image: NetworkImage(shoe.imageURL[0]),
-                //AssetImage('images/shoe2.jpg'),
-                fit: BoxFit.cover,
-              ),
-              boxShadow: const [
-                BoxShadow(
-                    color: ColorConstants.grey,
-                    blurRadius: 10,
-                    offset: Offset(0, 10))
-              ],
-              color: Color(int.parse(shoe.colors[0]))),
-          child: Stack(
-            children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      // decoration: BoxDecoration(
-                      //   //color: color == Colors.white?
-                      //   //color: Colors.blue.withOpacity(0.5),
-                      //   //  : color.withOpacity(0.3),
-                      //   borderRadius: BorderRadius.circular(25),
-                      // ),
-                      child: Text(shoe.name,
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: (identical(int.parse(shoe.colors[0]),
-                                        Colors.white.value) ||
-                                    identical(int.parse(shoe.colors[0]),
-                                        Colors.yellow.value))
-                                ? Colors.black
-                                : Colors.white,
-                          )),
-                    ),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                        width: double.infinity,
-                        height: 30,
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: shoe.category.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    decoration: BoxDecoration(
-                                      //color: color == Colors.white?
-                                      color: Colors.black.withOpacity(0.5),
-                                      //  : color.withOpacity(0.3),
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    child: Center(
-                                      child: Text(shoe.category[index],
-                                          style: const TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold,
-                                              color: ColorConstants.white)),
-                                    )),
-                              );
-                            })),
-                  ],
-                ),
-              ),
-              Obx(() {
-                return Align(
-                  alignment: Alignment.topLeft,
-                  child: InkWell(
-                    onTap: () {
-                      shoeControll.shoe = homeControll.newShoeList[index];
-                      shoeControll.cFav();
-                    },
-                    child: Container(
-                      width: 35,
-                      height: 35,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: ColorConstants.white,
-                          border: Border.all(color: Colors.red)),
-                      child: Center(
-                          child: FlareActor(
-                        'assets/Like.flr',
-                        alignment: Alignment.center,
-                        fit: BoxFit.contain,
-                        animation: shoe.isFav.value,
-                      )),
-                    ),
-                  ),
-                );
-              }),
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    //color: color == Colors.white
-                    /*?*/ //color: Colors.blue.withOpacity(0.5),
-                    // : color.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: Text(shoe.price,
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: (identical(int.parse(shoe.colors[0]),
-                                    Colors.white.value) ||
-                                identical(int.parse(shoe.colors[0]),
-                                    Colors.yellow.value))
-                            ? Colors.black
-                            : Colors.white,
-                      )),
-                ),
-              ),
+      child: Container(
+        height: 250,
+        // width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        margin: const EdgeInsets.only(bottom: 20),
+        decoration: BoxDecoration(
+            // color: ,
+            borderRadius: BorderRadius.circular(20),
+            image: DecorationImage(
+              image: NetworkImage(shoe.imageURL[0]),
+              //AssetImage('images/shoe2.jpg'),
+              fit: BoxFit.cover,
+            ),
+            boxShadow: const [
+              BoxShadow(
+                  color: ColorConstants.grey,
+                  blurRadius: 10,
+                  offset: Offset(0, 10))
             ],
-          ),
+            color: Color(int.parse(shoe.colors[0]))),
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    // decoration: BoxDecoration(
+                    //   //color: color == Colors.white?
+                    //   //color: Colors.blue.withOpacity(0.5),
+                    //   //  : color.withOpacity(0.3),
+                    //   borderRadius: BorderRadius.circular(25),
+                    // ),
+                    child: Text(shoe.name,
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: (identical(int.parse(shoe.colors[0]),
+                                      Colors.white.value) ||
+                                  identical(int.parse(shoe.colors[0]),
+                                      Colors.yellow.value))
+                              ? Colors.black
+                              : Colors.white,
+                        )),
+                  ),
+                  const SizedBox(height: 10),
+                  SizedBox(
+                      width: double.infinity,
+                      height: 30,
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: shoe.category.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    //color: color == Colors.white?
+                                    color: Colors.black.withOpacity(0.5),
+                                    //  : color.withOpacity(0.3),
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  child: Center(
+                                    child: Text(shoe.category[index],
+                                        style: const TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            color: ColorConstants.white)),
+                                  )),
+                            );
+                          })),
+                ],
+              ),
+            ),
+            Obx(() {
+              return Align(
+                alignment: Alignment.topLeft,
+                child: InkWell(
+                  onTap: () {
+                    shoeControll.shoe = homeControll.newShoeList[index];
+                    shoeControll.cFav();
+                  },
+                  child: Container(
+                    width: 35,
+                    height: 35,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: ColorConstants.white,
+                        border: Border.all(color: Colors.red)),
+                    child: Center(
+                        child: FlareActor(
+                      'assets/Like.flr',
+                      alignment: Alignment.center,
+                      fit: BoxFit.contain,
+                      animation: shoe.isFav.value,
+                    )),
+                  ),
+                ),
+              );
+            }),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  //color: color == Colors.white
+                  /*?*/ //color: Colors.blue.withOpacity(0.5),
+                  // : color.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Text(shoe.price,
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: (identical(int.parse(shoe.colors[0]),
+                                  Colors.white.value) ||
+                              identical(int.parse(shoe.colors[0]),
+                                  Colors.yellow.value))
+                          ? Colors.black
+                          : Colors.white,
+                    )),
+              ),
+            ),
+          ],
         ),
       ),
     );

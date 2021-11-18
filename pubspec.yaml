@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  auto_size_text: ^3.0.0
   cached_network_image: ^3.1.0
   cloud_firestore: ^2.5.3
   cupertino_icons: ^1.0.2
@@ -60,8 +61,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
-    - assets/HeartFavorite.flr
     - assets/Like.flr
+    - assets/loading.flr
+    - assets/shoe.flr
+    - assets/ShoeLoading.flr
+
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -75,12 +79,12 @@ flutter:
   fonts:
     - family: MainFont
       fonts:
-        - asset: assets/fonts/ParsiFont.TTF
+        - asset: assets/fonts/Afra.ttf
         #- asset: assets/fonts/EnglishFont.TTF
-    - family: EFont
-      fonts:
-        #- asset: assets/fonts/ParsiFont.TTF
-        - asset: assets/fonts/EnglishFont.TTF    
+    # - family: EFont
+    #   fonts:
+    #     #- asset: assets/fonts/ParsiFont.TTF
+    #     - asset: assets/fonts/EnglishFont.TTF
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

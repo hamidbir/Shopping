@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/auth_controller.dart';
 import 'package:shopping_shoe/model/bag_model.dart';
-import 'package:shopping_shoe/model/shoe.dart';
 import 'package:shopping_shoe/repository/cloud_function.dart';
-import 'package:shopping_shoe/utils/storage.dart';
 
 class BagController extends GetxController {
   var isLoading = true.obs;

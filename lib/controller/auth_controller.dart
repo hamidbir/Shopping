@@ -61,7 +61,6 @@ class AuthController extends GetxController {
         }
       } on Exception {
         errorText.value = 'اوپس. مشکلی رخ داد :(';
-        print('oooooooooooooooooooooooooo');
         isLoading.value = false;
         return false;
       } catch (e) {

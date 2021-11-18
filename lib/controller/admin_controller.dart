@@ -93,7 +93,6 @@ class AdminController extends GetxController {
         // imageUrl.add(ress);
         onSelected(file);
         //isLoading.value = false;
-        print('done');
       });
     });
   }
@@ -111,7 +110,6 @@ class AdminController extends GetxController {
           .child(path);
       await ref.putBlob(file);
       image = await ref.getDownloadURL();
-      var uri = Uri.parse(image);
 
       imageUrl.add(image);
       imageUrlSave.add(image);

@@ -15,169 +15,179 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BagController bagControll = Get.put(BagController());
-    return Scaffold(
-        body: Row(
-      children: [
-        Expanded(
-            child: Container(
-          color: Colors.yellow,
-          child: Obx(() {
-            if (bagControll.isLoading.value) {
-              return showLoading(context);
-              // const Center(
-              //   child: CircularProgressIndicator(),
-              // );
-            } else {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text('مجموع:',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 28)),
-                  Text(bagControll.totalPrice.value.toString(),
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 28)),
-                  Container(
-                    width: 350,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        color: Colors.blueAccent,
-                        borderRadius: BorderRadiusDirectional.circular(15)),
-                    child: const Center(
-                      child: Text('پرداخت',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            color: Colors.white,
-                          )),
+    return WillPopScope(
+      onWillPop: () async => true,
+      child: Scaffold(
+          body: Row(
+        children: [
+          Expanded(
+              child: Container(
+            color: Colors.yellow,
+            child: Obx(() {
+              if (bagControll.isLoading.value) {
+                return Center(
+                  child: Container(
+                      color: Colors.red,
+                      width: 150,
+                      height: 150,
+                      child: const FlareActor(
+                        'assets/loading.flr',
+                        animation: 'walking',
+                      )),
+                );
+              } else {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text('مجموع:',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 28)),
+                    Text(bagControll.totalPrice.value.toString(),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 28)),
+                    Container(
+                      width: 350,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          color: Colors.blueAccent,
+                          borderRadius: BorderRadiusDirectional.circular(15)),
+                      child: const Center(
+                        child: Text('پرداخت',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.white,
+                            )),
+                      ),
                     ),
-                  ),
-                ],
-              );
-            }
-          }),
-        )),
-        Expanded(
-            child: SizedBox(
-                height: double.infinity,
-                child: Obx(() {
-                  if (bagControll.isLoading.value) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else {
-                    return SizedBox(
-                      height: double.infinity,
-                      child: GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 16,
-                          crossAxisSpacing: 8,
-                        ),
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        //  physics: NeverScrollableScrollPhysics(),
-                        itemCount: bagControll.itemList.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            width: 200,
-                            margin: const EdgeInsets.only(right: 16),
-                            child: Stack(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10.0),
-                                  child: ClipPath(
-                                      clipper: AppClipper(10, 100),
-                                      child: Container(
-                                        color: Colors.lightBlue.shade50,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Text(
-                                                bagControll
-                                                    .itemList[index].shoeName,
-                                                style: const TextStyle(
-                                                    fontSize: 18)),
-                                            const SizedBox(
-                                              height: 8.0,
-                                            ),
-                                            Text(
-                                                bagControll
-                                                    .itemList[index].shoePrice,
-                                                style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 18)),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                children: [
-                                                  CircleAvatar(
-                                                    radius: 19,
-                                                    backgroundColor: Color(
-                                                        int.parse(bagControll
-                                                            .itemList[index]
-                                                            .shoeColor)),
-                                                  ),
-                                                  const Spacer(),
-                                                  Text(bagControll
-                                                      .itemList[index]
-                                                      .shoeSize),
-                                                ],
+                  ],
+                );
+              }
+            }),
+          )),
+          Expanded(
+              child: SizedBox(
+                  height: double.infinity,
+                  child: Obx(() {
+                    if (bagControll.isLoading.value) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      return SizedBox(
+                        height: double.infinity,
+                        child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 16,
+                            crossAxisSpacing: 8,
+                          ),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          //  physics: NeverScrollableScrollPhysics(),
+                          itemCount: bagControll.itemList.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              width: 200,
+                              margin: const EdgeInsets.only(right: 16),
+                              child: Stack(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10.0),
+                                    child: ClipPath(
+                                        clipper: AppClipper(10, 100),
+                                        child: Container(
+                                          color: Colors.lightBlue.shade50,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                  bagControll
+                                                      .itemList[index].shoeName,
+                                                  style: const TextStyle(
+                                                      fontSize: 18)),
+                                              const SizedBox(
+                                                height: 8.0,
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      )),
-                                ),
-                                Positioned(
-                                  bottom: 110,
-                                  left: 10,
-                                  child: SizedBox(
-                                    width: 150,
-                                    height: 150,
-                                    child: Image.network(
-                                        bagControll.itemList[index].shoeImg),
+                                              Text(
+                                                  bagControll.itemList[index]
+                                                      .shoePrice,
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 18)),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  children: [
+                                                    CircleAvatar(
+                                                      radius: 19,
+                                                      backgroundColor: Color(
+                                                          int.parse(bagControll
+                                                              .itemList[index]
+                                                              .shoeColor)),
+                                                    ),
+                                                    const Spacer(),
+                                                    Text(bagControll
+                                                        .itemList[index]
+                                                        .shoeSize),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )),
                                   ),
-                                ),
-                                Positioned(
-                                  left: 0.0,
-                                  top: 10.0,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8.0, top: 10),
-                                    child: InkWell(
-                                      onTap: () {
-                                        bagControll.deleteShoeAsCart(index);
-                                      },
-                                      child: Container(
-                                          width: 25,
-                                          height: 25,
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: ColorConstants.white,
-                                              border: Border.all(
-                                                  color: Colors.red)),
-                                          child: const Center(
-                                              child: Icon(Icons.delete,
-                                                  size: 15,
-                                                  color: Colors.red))),
+                                  Positioned(
+                                    bottom: 110,
+                                    left: 10,
+                                    child: SizedBox(
+                                      width: 150,
+                                      height: 150,
+                                      child: Image.network(
+                                          bagControll.itemList[index].shoeImg),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  }
-                }))),
-      ],
-    ));
+                                  Positioned(
+                                    left: 0.0,
+                                    top: 10.0,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 8.0, top: 10),
+                                      child: InkWell(
+                                        onTap: () {
+                                          bagControll.deleteShoeAsCart(index);
+                                        },
+                                        child: Container(
+                                            width: 25,
+                                            height: 25,
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: ColorConstants.white,
+                                                border: Border.all(
+                                                    color: Colors.red)),
+                                            child: const Center(
+                                                child: Icon(Icons.delete,
+                                                    size: 15,
+                                                    color: Colors.red))),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    }
+                  }))),
+        ],
+      )),
+    );
   }
 
   Widget _buildBackground(BagModel shoe) {

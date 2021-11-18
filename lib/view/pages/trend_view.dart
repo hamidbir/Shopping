@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,7 +47,7 @@ class TrendView extends StatelessWidget {
                   child: Stack(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 50.0),
+                        padding: const EdgeInsets.only(top: 20.0, bottom: 5),
                         child: _buildBackground(homeControll.trendList[index]),
                       ),
                       Positioned(
@@ -70,7 +71,7 @@ class TrendView extends StatelessWidget {
     ShoeCardController shoeControll = Get.find();
 
     return ClipPath(
-      clipper: AppClipper(15, 150),
+      clipper: AppClipper(15, 120),
       child: Container(
         // decoration: BoxDecoration(
         // border: Border.all(
@@ -94,22 +95,20 @@ class TrendView extends StatelessWidget {
                 children: [
                   // const Icon(Icons.shower, size: 40, color: Colors.white),
                   const Expanded(child: SizedBox()),
-                  Container(
-                    padding: const EdgeInsets.only(right: 20.0),
-                    child: Text(shoe.name,
-                        textAlign: TextAlign.end,
-                        maxLines: 2,
-                        style: TextStyle(
-                          color: (identical(int.parse(shoe.colors[0]),
-                                      Colors.white.value) ||
-                                  identical(int.parse(shoe.colors[0]),
-                                      Colors.yellow.value))
-                              //trendShoe[index].colors[0] == '4294967295'
-                              ? Colors.black
-                              : Colors.white,
-                          fontSize: 22,
-                        )),
-                  ),
+                  AutoSizeText(shoe.name,
+                      textAlign: TextAlign.end,
+                      minFontSize: 18,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: (identical(int.parse(shoe.colors[0]),
+                                    Colors.white.value) ||
+                                identical(int.parse(shoe.colors[0]),
+                                    Colors.yellow.value))
+                            ? Colors.black
+                            : Colors.white,
+                        fontSize: 22,
+                      )),
                   const SizedBox(height: 8.0),
                   Padding(
                     padding: const EdgeInsets.only(right: 22.0),

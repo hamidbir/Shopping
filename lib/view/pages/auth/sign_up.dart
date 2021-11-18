@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/auth_controller.dart';
@@ -26,26 +27,36 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthController authController = Get.put(AuthController());
     return Scaffold(body: SafeArea(child: Obx(() {
-      return authController.isLoading.value
-          ? const Center(child: CircularProgressIndicator())
-          : Stack(
-              children: [
-                Image.asset(
-                  'assets/images/back4.jpg',
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: double.infinity,
-                ),
-                Center(
-                  child: ClipRect(
+      return Stack(
+        children: [
+          Image.asset(
+            'assets/images/back4.jpg',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+          Center(
+            child: authController.isLoading.value
+                ? Container(
+                    width: 250,
+                    height: 250,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.white),
+
+                    // child: const Text('asggggggggggggg'),
+                    child: const FlareActor(
+                      'assets/shoe.flr',
+                      animation: 'on',
+                      fit: BoxFit.contain,
+                    ))
+                : ClipRect(
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),
                       child: Container(
                         width: 400,
                         height: 500,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200.withOpacity(0.5),
-                        ),
+                        decoration: const BoxDecoration(
+                            color: Color.fromRGBO(251, 243, 228, 0.9)),
                         child: SingleChildScrollView(
                             child: Padding(
                           padding: const EdgeInsets.all(38.0),
@@ -80,14 +91,20 @@ class SignUp extends StatelessWidget {
                                       FocusScope.of(context).requestFocus(),
                                   textInputAction: TextInputAction.next,
                                   controller: authController.usernameController,
-                                  cursorColor: ColorConstants.white,
+                                  cursorColor:
+                                      const Color.fromRGBO(185, 22, 70, 1),
                                   decoration: const InputDecoration(
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(width: 0.0),
+                                      borderSide: BorderSide(
+                                          width: 0.0,
+                                          color:
+                                              Color.fromRGBO(153, 146, 132, 1)),
                                     ),
                                     hintText: nameHint,
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(width: 0.0),
+                                      borderSide: BorderSide(
+                                          width: 0.0,
+                                          color: Color.fromRGBO(16, 86, 82, 1)),
                                     ),
                                     // border: OutlineInputBorder(
                                     //   borderSide: BorderSide(
@@ -102,14 +119,20 @@ class SignUp extends StatelessWidget {
                                       FocusScope.of(context).requestFocus(),
                                   textInputAction: TextInputAction.next,
                                   controller: authController.emailController,
-                                  cursorColor: ColorConstants.white,
+                                  cursorColor:
+                                      const Color.fromRGBO(185, 22, 70, 1),
                                   decoration: const InputDecoration(
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(width: 0.0),
+                                      borderSide: BorderSide(
+                                          width: 0.0,
+                                          color:
+                                              Color.fromRGBO(153, 146, 132, 1)),
                                     ),
                                     hintText: emailHint,
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(width: 0.0),
+                                      borderSide: BorderSide(
+                                          width: 0.0,
+                                          color: Color.fromRGBO(16, 86, 82, 1)),
                                     ),
                                     // border: OutlineInputBorder(
                                     //   borderSide: BorderSide(
@@ -125,14 +148,20 @@ class SignUp extends StatelessWidget {
                                   onEditingComplete: () =>
                                       FocusScope.of(context).requestFocus(),
                                   controller: authController.passwordController,
-                                  cursorColor: ColorConstants.white,
+                                  cursorColor:
+                                      const Color.fromRGBO(185, 22, 70, 1),
                                   decoration: const InputDecoration(
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(width: 0.0),
+                                      borderSide: BorderSide(
+                                          width: 0.0,
+                                          color:
+                                              Color.fromRGBO(153, 146, 132, 1)),
                                     ),
                                     hintText: passwordHint,
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(width: 0.0),
+                                      borderSide: BorderSide(
+                                          width: 0.0,
+                                          color: Color.fromRGBO(16, 86, 82, 1)),
                                     ),
                                     // border: OutlineInputBorder(
                                     //   borderSide: BorderSide(
@@ -144,6 +173,9 @@ class SignUp extends StatelessWidget {
                               SizedBox(
                                 height: 55,
                                 child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        primary: const Color.fromRGBO(
+                                            185, 22, 70, 1)),
                                     onPressed: () async {
                                       await authController.signUp()
                                           ? Get.offAll(const LandingPage())
@@ -164,9 +196,9 @@ class SignUp extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-              ],
-            );
+          ),
+        ],
+      );
     })));
   }
 }

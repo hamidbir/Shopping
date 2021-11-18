@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:shopping_shoe/view/pages/admin_panel.dart';
 import 'package:shopping_shoe/view/pages/auth/login.dart';
 import 'package:shopping_shoe/view/pages/main_screen.dart';
+import 'package:shopping_shoe/view/pages/test_flare.dart';
 import 'package:shopping_shoe/view/pages/trend_view.dart';
 
 Future<void> main() async {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         future: _initialztion,
         builder: (context, snapshot) {
           return GetMaterialApp(
+              debugShowCheckedModeBanner: false,
               localizationsDelegates: const [
                 GlobalCupertinoLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
@@ -42,6 +44,7 @@ class MyApp extends StatelessWidget {
               ),
               home: //const TrendView(),
                   Login());
+          // const TestFlare());
           //const MainScreen()); //const LandingPage()), // AdminPanel()),
         });
   }

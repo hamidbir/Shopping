@@ -45,27 +45,40 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthController authController = Get.put(AuthController());
     return Scaffold(body: SafeArea(child: Obx(() {
-      return authController.isLoading.value
-          ? showLoading(context)
-          : Stack(
-              children: [
-                Image.asset(
-                  'assets/images/back4.jpg',
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: double.infinity,
-                  //alignment: FractionalOffset(animation.value, 0),
-                ),
-                Center(
-                  child: ClipRect(
+      return Stack(
+        children: [
+          Image.asset(
+            'assets/images/back4.jpg',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+            //alignment: FractionalOffset(animation.value, 0),
+          ),
+          Center(
+            child: authController.isLoading.value
+                ? Container(
+                    width: 250,
+                    height: 250,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.white),
+
+                    // child: const Text('asggggggggggggg'),
+                    child: const FlareActor(
+                      'assets/shoe.flr',
+                      animation: 'on',
+                      fit: BoxFit.contain,
+                    ))
+                : ClipRect(
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 0.7, sigmaY: 0.7),
                       child: Container(
                         width: 400,
                         height: 400,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200.withOpacity(0.5),
-                        ),
+                        decoration: const BoxDecoration(
+                            //color: Colors.grey.shade200.withOpacity(0.5),
+                            color: Color.fromRGBO(251, 243, 228, 0.9)
+                            //rgb(251, 243, 228)
+                            ),
                         child: SingleChildScrollView(
                             child: Padding(
                           padding: const EdgeInsets.all(38.0),
@@ -99,16 +112,21 @@ class Login extends StatelessWidget {
                                       FocusScope.of(context).requestFocus(),
                                   textInputAction: TextInputAction.next,
                                   controller: authController.emailController,
-                                  cursorColor: ColorConstants.white,
-                                  style: const TextStyle(
-                                      fontFamilyFallback: ['EFont']),
+                                  cursorColor:
+                                      const Color.fromRGBO(185, 22, 70, 1),
                                   decoration: const InputDecoration(
                                       focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(width: 0.0),
+                                        borderSide: BorderSide(
+                                            width: 0.0,
+                                            color: Color.fromRGBO(
+                                                153, 146, 132, 1)),
                                       ),
                                       hintText: emailHint,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(width: 0.0),
+                                        borderSide: BorderSide(
+                                            width: 0.0,
+                                            color:
+                                                Color.fromRGBO(16, 86, 82, 1)),
                                       ),
                                       border: OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -117,22 +135,27 @@ class Login extends StatelessWidget {
                                       ))),
                               const SizedBox(height: 5),
                               TextField(
-                                  style: const TextStyle(
-                                      fontFamilyFallback: ['EFont']),
                                   focusNode: passNode,
                                   textInputAction: TextInputAction.next,
                                   obscureText: true,
                                   onEditingComplete: () =>
                                       FocusScope.of(context).requestFocus(),
                                   controller: authController.passwordController,
-                                  cursorColor: ColorConstants.white,
+                                  cursorColor:
+                                      const Color.fromRGBO(185, 22, 70, 1),
                                   decoration: const InputDecoration(
                                       focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(width: 0.0),
+                                        borderSide: BorderSide(
+                                            width: 0.0,
+                                            color: Color.fromRGBO(
+                                                153, 146, 132, 1)),
                                       ),
                                       hintText: passwordHint,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(width: 0.0),
+                                        borderSide: BorderSide(
+                                            width: 0.0,
+                                            color:
+                                                Color.fromRGBO(16, 86, 82, 1)),
                                       ),
                                       border: OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -143,6 +166,9 @@ class Login extends StatelessWidget {
                               SizedBox(
                                 height: 55,
                                 child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        primary: const Color.fromRGBO(
+                                            185, 22, 70, 1)),
                                     onPressed: () async {
                                       await authController.signIn()
                                           ? authController.getAdmin()
@@ -156,7 +182,8 @@ class Login extends StatelessWidget {
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold,
-                                          color: ColorConstants.dark),
+                                          color:
+                                              Color.fromRGBO(240, 228, 215, 1)),
                                     )),
                               )
                             ],
@@ -165,23 +192,9 @@ class Login extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-              ],
-            );
+          ),
+        ],
+      );
     })));
   }
-}
-
-Widget showLoading(BuildContext context) {
-  Future.delayed(
-      Duration.zero,
-      () => showDialog(
-          context: context,
-          builder: (_) => const Dialog(
-              backgroundColor: Colors.transparent,
-              child: FlareActor(
-                'assets/loading.flr',
-                animation: 'walking',
-              ))));
-  return const SizedBox();
 }

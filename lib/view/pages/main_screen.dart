@@ -1,4 +1,3 @@
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/home_page_controller.dart';
@@ -20,20 +19,6 @@ class MainScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const ProfileView()));
-          },
-          child: const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              radius: 19,
-              backgroundColor: Colors.blue,
-              child: Text('P'),
-            ),
-          ),
-        ),
         actions: [
           InkWell(
             onTap: () {
@@ -41,10 +26,27 @@ class MainScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const CartScreen()));
             },
             child: const Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(right: 18),
               child: Icon(Icons.shopping_bag),
             ),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 18),
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const ProfileView()));
+              },
+              child: const CircleAvatar(
+                radius: 19,
+                backgroundColor: Colors.blue,
+                child: Text('P'),
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 30,
+          ),
         ],
       ),
       body: Column(

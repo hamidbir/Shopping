@@ -16,90 +16,107 @@ class ProfileView extends StatelessWidget {
     final MyProfileController myProfileController =
         Get.put(MyProfileController());
     print('user: ${myProfileController.userName.value}');
-    return Scaffold(
-        body: Row(
-      children: [
-        Expanded(child: Container(color: Colors.red)),
-        Expanded(
-            child: Container(
-                color: Colors.black,
-                child: Obx(() {
-                  if (myProfileController.isLoading.value) {
-                    return const Center(
-                        child: CircularProgressIndicator(
-                      backgroundColor: ColorConstants.white,
-                    ));
-                  } else if (myProfileController.isNetworkError.value) {
-                    return Center(
-                      child: Column(
-                        children: [
-                          const Text('مشکلی پیش آمد'),
-                          const SizedBox(
-                            height: 30.0,
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              myProfileController.getUserDetail();
-                            },
-                            child: const Text('تلاش دوباره'),
-                          ),
-                        ],
+    return WillPopScope(
+      onWillPop: () async => true,
+      child: Scaffold(
+        body: Obx(() {
+          if (myProfileController.isLoading.value) {
+            return Container(
+                width: 250,
+                height: 250,
+                color: Colors.transparent,
+                child: const FlareActor(
+                  'assets/shoe.flr',
+                  animation: 'on',
+                  fit: BoxFit.contain,
+                ));
+          } else if (myProfileController.isNetworkError.value) {
+            return Center(
+              child: Column(
+                children: [
+                  const Text('مشکلی پیش آمد'),
+                  const SizedBox(
+                    height: 30.0,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      myProfileController.getUserDetail();
+                    },
+                    child: const Text('تلاش دوباره'),
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  myProfileController.userName.value,
+                  style: const TextStyle(fontSize: 25.0, color: Colors.black),
+                ),
+                Text(
+                  myProfileController.email.value,
+                  style: const TextStyle(fontSize: 25.0, color: Colors.black),
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                Expanded(
+                  child: GridView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 5,
+                        mainAxisSpacing: 16,
+                        crossAxisSpacing: 8,
                       ),
-                    );
-                  }
-
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        myProfileController.userName.value,
-                        style: const TextStyle(
-                            fontSize: 25.0, color: Colors.white),
-                      ),
-                      Text(
-                        myProfileController.email.value,
-                        style: const TextStyle(
-                            fontSize: 25.0, color: Colors.white),
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      const Divider(height: 1, color: Colors.white),
-                      const Spacer(),
-                      InkWell(
-                        onTap: () {
-                          myProfileController.refresh();
-                          var height = MediaQuery.of(context).size.height;
-                          var width = MediaQuery.of(context).size.width;
-                          print(myProfileController.favList.length);
-                          if (myProfileController.favList.isEmpty) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content:
-                                        Text('به کفشی علاقه ای نشون ندادی')));
-                          } else {
-                            showDialog(
-                                context: context,
-                                builder: (context) => showFav(width, height));
-                          }
-                        },
-                        child: ListTile(
-                          title: SettingsList.list[0],
-                          trailing: const Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.white,
-                            size: 20.0,
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                    ],
-                  );
-                }))),
-        Expanded(child: Container(color: Colors.red)),
-      ],
-    ));
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            if (index == 0) {
+                              myProfileController.refresh();
+                              var height = MediaQuery.of(context).size.height;
+                              var width = MediaQuery.of(context).size.width;
+                              if (myProfileController.favList.isEmpty) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'به کفشی علاقه ای نشون ندادی')));
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                        showFav(width, height));
+                              }
+                            }
+                          },
+                          child: Card(
+                              color: const Color.fromRGBO(251, 243, 228, 0.9),
+                              child: Stack(
+                                children: [
+                                  Center(
+                                    child: icons[index],
+                                  ),
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(items[index],
+                                        style: const TextStyle(
+                                            fontSize: 22, color: Colors.black)),
+                                  ),
+                                ],
+                              )),
+                        );
+                      }),
+                ),
+              ],
+            );
+          }
+        }),
+      ),
+    );
   }
 
   Widget showFav(double width, double height) {
@@ -144,8 +161,6 @@ class ProfileView extends StatelessWidget {
   }
 
   Widget makeItem(Shoe shoe, int index, BuildContext context) {
-    //TODO:
-    //ShoeCardController shoeControll = Get.put(ShoeCardController());
     MyProfileController myProfileController = Get.find();
     ShoeCardController shoeControll = Get.find();
 
@@ -200,10 +215,16 @@ class ProfileView extends StatelessWidget {
                       //   borderRadius: BorderRadius.circular(25),
                       // ),
                       child: Text(shoe.name,
-                          style: const TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                              color: ColorConstants.white)),
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: (identical(int.parse(shoe.colors[0]),
+                                        Colors.white.value) ||
+                                    identical(int.parse(shoe.colors[0]),
+                                        Colors.yellow.value))
+                                ? Colors.black
+                                : Colors.white,
+                          )),
                     ),
                     const SizedBox(height: 10),
                     SizedBox(
@@ -270,10 +291,16 @@ class ProfileView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(25),
                   ),
                   child: Text(shoe.price,
-                      style: const TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: ColorConstants.white)),
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: (identical(int.parse(shoe.colors[0]),
+                                    Colors.white.value) ||
+                                identical(int.parse(shoe.colors[0]),
+                                    Colors.yellow.value))
+                            ? Colors.black
+                            : Colors.white,
+                      )),
                 ),
               ),
             ],
@@ -284,16 +311,23 @@ class ProfileView extends StatelessWidget {
   }
 }
 
-class SettingsList {
-  static const list = [
-    InkWell(
-        child: Text('مرودعلاقه',
-            style: TextStyle(color: Colors.white, fontSize: 20))),
-    Text('تاریخچه خرید', style: TextStyle(color: Colors.white, fontSize: 20)),
-    // const Text('Shipping Address'),
-    // const Text('Payment Methods'),
-    // const Text('Promocodes'),
-    // const Text('My reviews'),
-    Text('تنظیمات', style: TextStyle(color: Colors.white, fontSize: 20))
-  ];
-}
+List<String> items = [
+  'موردعلاقه ها',
+  'تنظمیات',
+  'وضعیت آخرین سفارش',
+  'تاریخچه سفارشات',
+  'تغییر آدرس',
+  'گزارش خطا',
+  'خروج از حساب کاربری'
+];
+List<Icon> icons = [
+  const Icon(Icons.favorite, size: 123, color: Color.fromRGBO(185, 22, 70, 1)),
+  const Icon(Icons.settings, size: 123, color: Color.fromRGBO(185, 22, 70, 1)),
+  const Icon(Icons.swap_horiz_sharp,
+      size: 123, color: Color.fromRGBO(185, 22, 70, 1)),
+  const Icon(Icons.history, size: 123, color: Color.fromRGBO(185, 22, 70, 1)),
+  const Icon(Icons.home, size: 123, color: Color.fromRGBO(185, 22, 70, 1)),
+  const Icon(Icons.report, size: 123, color: Color.fromRGBO(185, 22, 70, 1)),
+  const Icon(Icons.exit_to_app,
+      size: 123, color: Color.fromRGBO(185, 22, 70, 1)),
+];

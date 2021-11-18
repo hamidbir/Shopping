@@ -53,13 +53,7 @@ class HomePage extends StatelessWidget {
       //   ],
       // ),
       body: Obx(() {
-        if (homeControll.isLoading.value) {
-          return showLoading(context);
-          // const Center(
-          //     child: CircularProgressIndicator(
-          //   backgroundColor: ColorConstants.white,
-          // ));
-        } else if (homeControll.isNetError.value) {
+        if (homeControll.isNetError.value) {
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -82,63 +76,70 @@ class HomePage extends StatelessWidget {
         } else {
           //print(homeControll.newShoeList);
           //return const Text(' Heyyyyyyyy');
-          return SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  // SizedBox(
-                  //   height: 40,
-                  //   child: ListView.builder(
-                  //     scrollDirection: Axis.horizontal,
-                  //     itemCount: titleCat.length,
-                  //     shrinkWrap: true,
-                  //     itemBuilder: (context, index) {
-                  //       return AspectRatio(
-                  //         aspectRatio: 2 / 1,
-                  //         child: InkWell(
-                  //           child: Container(
-                  //               margin: const EdgeInsets.only(right: 10),
-                  //               decoration: BoxDecoration(
-                  //                 color: ColorConstants.grey,
-                  //                 borderRadius: BorderRadius.circular(20),
-                  //               ),
-                  //               child: Center(
-                  //                 //TODO: for font size: when cick item font size 20 and default font size 17
-                  //                 child: Text(titleCat[index]),
-                  //               )),
-                  //         ),
-                  //       );
-                  //     },
-                  //   ),
-                  // ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 16,
-                      crossAxisSpacing: 8,
+          return homeControll.isLoading.value
+              ? Center(
+                  child: Container(
+                      color: Colors.transparent,
+                      width: 250,
+                      height: 250,
+                      child: const FlareActor(
+                        'assets/shoe.flr',
+                        animation: 'on',
+                      )),
+                )
+              : SingleChildScrollView(
+                  child: Container(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      children: [
+                        // SizedBox(
+                        //   height: 40,
+                        //   child: ListView.builder(
+                        //     scrollDirection: Axis.horizontal,
+                        //     itemCount: titleCat.length,
+                        //     shrinkWrap: true,
+                        //     itemBuilder: (context, index) {
+                        //       return AspectRatio(
+                        //         aspectRatio: 2 / 1,
+                        //         child: InkWell(
+                        //           child: Container(
+                        //               margin: const EdgeInsets.only(right: 10),
+                        //               decoration: BoxDecoration(
+                        //                 color: ColorConstants.grey,
+                        //                 borderRadius: BorderRadius.circular(20),
+                        //               ),
+                        //               child: Center(
+                        //                 //TODO: for font size: when cick item font size 20 and default font size 17
+                        //                 child: Text(titleCat[index]),
+                        //               )),
+                        //         ),
+                        //       );
+                        //     },
+                        //   ),
+                        // ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 16,
+                            crossAxisSpacing: 8,
+                          ),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          //  physics: NeverScrollableScrollPhysics(),
+                          itemCount: homeControll.newShoeList.length,
+                          itemBuilder: (context, index) {
+                            return makeItem(homeControll.newShoeList[index],
+                                index, context);
+                          },
+                        ),
+                      ],
                     ),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    //  physics: NeverScrollableScrollPhysics(),
-                    itemCount: homeControll.newShoeList.length,
-                    itemBuilder: (context, index) {
-                      return makeItem(
-                          homeControll.newShoeList[index], index, context);
-                      //return Text(homeControll.newShoeList[index].name);
-                    },
                   ),
-
-                  // makeItem(
-                  //     tag: 5, image: 'images/shoe1.jpg', color: Colors.white),
-                ],
-              ),
-            ),
-          );
+                );
         }
       }),
     ));
@@ -157,11 +158,9 @@ class HomePage extends StatelessWidget {
             homeControll.newShoeList[index].colors.first;
         shoe.view++;
         shoeControll.updateShoe();
-        //shoeControll.favManage.value = 'Idle';
+
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const DetailShoe()));
-
-//        Get.to(const DetailShoe());
       },
       child: Hero(
         tag: shoe.id,
@@ -201,10 +200,16 @@ class HomePage extends StatelessWidget {
                       //   borderRadius: BorderRadius.circular(25),
                       // ),
                       child: Text(shoe.name,
-                          style: const TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                              color: ColorConstants.white)),
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: (identical(int.parse(shoe.colors[0]),
+                                        Colors.white.value) ||
+                                    identical(int.parse(shoe.colors[0]),
+                                        Colors.yellow.value))
+                                ? Colors.black
+                                : Colors.white,
+                          )),
                     ),
                     const SizedBox(height: 10),
                     SizedBox(
@@ -275,10 +280,16 @@ class HomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(25),
                   ),
                   child: Text(shoe.price,
-                      style: const TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: ColorConstants.white)),
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: (identical(int.parse(shoe.colors[0]),
+                                    Colors.white.value) ||
+                                identical(int.parse(shoe.colors[0]),
+                                    Colors.yellow.value))
+                            ? Colors.black
+                            : Colors.white,
+                      )),
                 ),
               ),
             ],

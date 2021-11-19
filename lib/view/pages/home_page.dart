@@ -9,6 +9,7 @@ import 'package:shopping_shoe/controller/home_page_controller.dart';
 import 'package:shopping_shoe/controller/shoe_card_controller.dart';
 import 'package:shopping_shoe/model/shoe.dart';
 import 'package:shopping_shoe/utils/color_const.dart';
+import 'package:shopping_shoe/utils/route_transition.dart';
 import 'package:shopping_shoe/view/pages/auth/login.dart';
 import 'package:shopping_shoe/view/pages/detail_shoe.dart';
 
@@ -159,8 +160,7 @@ class HomePage extends StatelessWidget {
         shoe.view++;
         shoeControll.updateShoe();
 
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const DetailShoe()));
+        Navigator.of(context).push(SizeRoute(page: const DetailShoe()));
       },
       child: Container(
         height: 250,

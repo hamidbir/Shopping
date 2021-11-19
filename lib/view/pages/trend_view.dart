@@ -6,6 +6,7 @@ import 'package:shopping_shoe/controller/home_page_controller.dart';
 import 'package:shopping_shoe/controller/shoe_card_controller.dart';
 import 'package:shopping_shoe/model/shoe.dart';
 import 'package:shopping_shoe/utils/color_const.dart';
+import 'package:shopping_shoe/utils/route_transition.dart';
 import 'package:shopping_shoe/view/pages/detail_shoe.dart';
 
 class TrendView extends StatelessWidget {
@@ -38,8 +39,8 @@ class TrendView extends StatelessWidget {
                   homeControll.trendList[index].view++;
                   shoeControll.updateShoe();
                   //shoeControll.favManage.value = 'Idle';
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const DetailShoe()));
+                  Navigator.of(context)
+                      .push(ScaleRoute(page: const DetailShoe()));
                 },
                 child: Container(
                   width: 200,

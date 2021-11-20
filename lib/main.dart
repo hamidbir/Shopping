@@ -12,9 +12,11 @@ import 'package:shopping_shoe/view/pages/home/home_page.dart';
 import 'package:shopping_shoe/view/pages/home/main_screen.dart';
 import 'package:shopping_shoe/view/pages/my_profile.dart';
 import 'package:shopping_shoe/view/pages/profile_view.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy();
   // get storage init initilize
   await GetStorage.init();
   runApp(const MyApp());

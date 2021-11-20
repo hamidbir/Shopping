@@ -159,8 +159,7 @@ class HomePage extends StatelessWidget {
             homeControll.newShoeList[index].colors.first;
         shoe.view++;
         shoeControll.updateShoe();
-
-        Navigator.of(context).push(SizeRoute(page: const DetailShoe()));
+        Get.toNamed('/detail_shoe');
       },
       child: Container(
         height: 250,

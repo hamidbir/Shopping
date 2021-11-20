@@ -38,9 +38,7 @@ class TrendView extends StatelessWidget {
                       homeControll.trendList[index].colors.first;
                   homeControll.trendList[index].view++;
                   shoeControll.updateShoe();
-                  //shoeControll.favManage.value = 'Idle';
-                  Navigator.of(context)
-                      .push(ScaleRoute(page: const DetailShoe()));
+                  Get.toNamed('/detail_shoe');
                 },
                 child: Container(
                   width: 200,

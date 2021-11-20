@@ -7,7 +7,7 @@ import 'package:shopping_shoe/model/bag_model.dart';
 import 'package:shopping_shoe/model/shoe.dart';
 import 'package:shopping_shoe/utils/color_const.dart';
 import 'package:shopping_shoe/view/pages/auth/login.dart';
-import 'package:shopping_shoe/view/pages/trend_view.dart';
+import 'package:shopping_shoe/view/pages/home/trend_view.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);

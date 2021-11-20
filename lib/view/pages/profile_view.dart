@@ -173,138 +173,135 @@ class ProfileView extends StatelessWidget {
         shoe.view++;
         shoeControll.updateShoe();
         //shoeControll.favManage.value = 'Idle';
-        Navigator.of(context).push(ScaleRoute(page: const DetailShoe()));
+        //Navigator.of(context).push(ScaleRoute(page: const DetailShoe()));
 
-//        Get.to(const DetailShoe());
+        Get.toNamed('/detail_shoe');
       },
-      child: Hero(
-        tag: shoe.id,
-        child: Container(
-          height: 250,
-          // width: double.infinity,
-          padding: const EdgeInsets.all(20),
-          margin: const EdgeInsets.only(bottom: 20),
-          decoration: BoxDecoration(
-              // color: ,
-              borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(
-                image: NetworkImage(shoe.imageURL[0]),
-                //AssetImage('images/shoe2.jpg'),
-                fit: BoxFit.cover,
-              ),
-              boxShadow: const [
-                BoxShadow(
-                    color: ColorConstants.grey,
-                    blurRadius: 10,
-                    offset: Offset(0, 10))
-              ],
-              color: Color(int.parse(shoe.colors[0]))),
-          child: Stack(
-            children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      // decoration: BoxDecoration(
-                      //   //color: color == Colors.white?
-                      //   //color: Colors.blue.withOpacity(0.5),
-                      //   //  : color.withOpacity(0.3),
-                      //   borderRadius: BorderRadius.circular(25),
-                      // ),
-                      child: Text(shoe.name,
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: (identical(int.parse(shoe.colors[0]),
-                                        Colors.white.value) ||
-                                    identical(int.parse(shoe.colors[0]),
-                                        Colors.yellow.value))
-                                ? Colors.black
-                                : Colors.white,
-                          )),
-                    ),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                        width: double.infinity,
-                        height: 30,
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: shoe.category.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    decoration: BoxDecoration(
-                                      //color: color == Colors.white?
-                                      color: Colors.black.withOpacity(0.5),
-                                      //  : color.withOpacity(0.3),
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    child: Center(
-                                      child: Text(shoe.category[index],
-                                          style: const TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold,
-                                              color: ColorConstants.white)),
-                                    )),
-                              );
-                            })),
-                  ],
-                ),
-              ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: InkWell(
-                  onTap: () {
-                    myProfileController.deleteFav(shoe);
-                  },
-                  child: Container(
-                    width: 35,
-                    height: 35,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorConstants.white,
-                        border: Border.all(color: Colors.red)),
-                    child: const Center(
-                        child: Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                      //size: 15,
-                    )),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    //color: color == Colors.white
-                    /*?*/ //color: Colors.blue.withOpacity(0.5),
-                    // : color.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: Text(shoe.price,
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: (identical(int.parse(shoe.colors[0]),
-                                    Colors.white.value) ||
-                                identical(int.parse(shoe.colors[0]),
-                                    Colors.yellow.value))
-                            ? Colors.black
-                            : Colors.white,
-                      )),
-                ),
-              ),
+      child: Container(
+        height: 250,
+        // width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        margin: const EdgeInsets.only(bottom: 20),
+        decoration: BoxDecoration(
+            // color: ,
+            borderRadius: BorderRadius.circular(20),
+            image: DecorationImage(
+              image: NetworkImage(shoe.imageURL[0]),
+              //AssetImage('images/shoe2.jpg'),
+              fit: BoxFit.cover,
+            ),
+            boxShadow: const [
+              BoxShadow(
+                  color: ColorConstants.grey,
+                  blurRadius: 10,
+                  offset: Offset(0, 10))
             ],
-          ),
+            color: Color(int.parse(shoe.colors[0]))),
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    // decoration: BoxDecoration(
+                    //   //color: color == Colors.white?
+                    //   //color: Colors.blue.withOpacity(0.5),
+                    //   //  : color.withOpacity(0.3),
+                    //   borderRadius: BorderRadius.circular(25),
+                    // ),
+                    child: Text(shoe.name,
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: (identical(int.parse(shoe.colors[0]),
+                                      Colors.white.value) ||
+                                  identical(int.parse(shoe.colors[0]),
+                                      Colors.yellow.value))
+                              ? Colors.black
+                              : Colors.white,
+                        )),
+                  ),
+                  const SizedBox(height: 10),
+                  SizedBox(
+                      width: double.infinity,
+                      height: 30,
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: shoe.category.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    //color: color == Colors.white?
+                                    color: Colors.black.withOpacity(0.5),
+                                    //  : color.withOpacity(0.3),
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  child: Center(
+                                    child: Text(shoe.category[index],
+                                        style: const TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            color: ColorConstants.white)),
+                                  )),
+                            );
+                          })),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: InkWell(
+                onTap: () {
+                  myProfileController.deleteFav(shoe);
+                },
+                child: Container(
+                  width: 35,
+                  height: 35,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ColorConstants.white,
+                      border: Border.all(color: Colors.red)),
+                  child: const Center(
+                      child: Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                    //size: 15,
+                  )),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  //color: color == Colors.white
+                  /*?*/ //color: Colors.blue.withOpacity(0.5),
+                  // : color.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Text(shoe.price,
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: (identical(int.parse(shoe.colors[0]),
+                                  Colors.white.value) ||
+                              identical(int.parse(shoe.colors[0]),
+                                  Colors.yellow.value))
+                          ? Colors.black
+                          : Colors.white,
+                    )),
+              ),
+            ),
+          ],
         ),
       ),
     );

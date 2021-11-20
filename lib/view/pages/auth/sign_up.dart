@@ -5,20 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/auth_controller.dart';
 import 'package:shopping_shoe/utils/color_const.dart';
+import 'package:shopping_shoe/utils/constants.dart';
+import 'package:shopping_shoe/utils/route_transition.dart';
 import 'package:shopping_shoe/view/pages/auth/login.dart';
-import 'package:shopping_shoe/view/pages/home_page.dart';
 import 'package:shopping_shoe/view/pages/landing_page.dart';
-import 'package:shopping_shoe/view/pages/upload_shoe_screen.dart';
+import 'package:shopping_shoe/view/pages/home/main_screen.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({Key? key}) : super(key: key);
 
-  static const String login = ' ثبت نام کرده اید؟ ورود';
-  static const String signUp = 'ثبت نام';
-  static const String nameHint = 'نام کاربری';
-  static const String emailHint = 'ایمیل';
-  static const String passwordHint = 'پسورد';
-  static const String authFail = 'احرازهویت شکست خورد';
   static FocusNode nameNode = FocusNode();
   static FocusNode emailNode = FocusNode();
   static FocusNode passNode = FocusNode();
@@ -26,9 +21,10 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthController authController = Get.put(AuthController());
-    return Scaffold(body: SafeArea(child: Obx(() {
+    return Scaffold(body: Obx(() {
       return Stack(
         children: [
+          // Image Backgroud
           Image.asset(
             'assets/images/back4.jpg',
             fit: BoxFit.cover,
@@ -42,8 +38,7 @@ class SignUp extends StatelessWidget {
                     height: 250,
                     decoration: const BoxDecoration(
                         shape: BoxShape.circle, color: Colors.white),
-
-                    // child: const Text('asggggggggggggg'),
+                    // Package Flare for loading
                     child: const FlareActor(
                       'assets/shoe.flr',
                       animation: 'on',
@@ -65,7 +60,7 @@ class SignUp extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const Text(
-                                signUp,
+                                Constants.signUpText,
                                 style: TextStyle(
                                     fontSize: 32,
                                     fontWeight: FontWeight.bold,
@@ -74,10 +69,10 @@ class SignUp extends StatelessWidget {
                               const SizedBox(height: 10),
                               InkWell(
                                 onTap: () {
-                                  Get.offAll(Login());
+                                  Get.offNamed('/Login');
                                 },
                                 child: const Text(
-                                  login,
+                                  Constants.loginText,
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -100,17 +95,12 @@ class SignUp extends StatelessWidget {
                                           color:
                                               Color.fromRGBO(153, 146, 132, 1)),
                                     ),
-                                    hintText: nameHint,
+                                    hintText: Constants.nameHintText,
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           width: 0.0,
                                           color: Color.fromRGBO(16, 86, 82, 1)),
                                     ),
-                                    // border: OutlineInputBorder(
-                                    //   borderSide: BorderSide(
-                                    //       color: ColorConstants.primary,
-                                    //       width: 0.0),
-                                    // )
                                   )),
                               const SizedBox(height: 10),
                               TextField(
@@ -128,17 +118,12 @@ class SignUp extends StatelessWidget {
                                           color:
                                               Color.fromRGBO(153, 146, 132, 1)),
                                     ),
-                                    hintText: emailHint,
+                                    hintText: Constants.emailHintText,
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           width: 0.0,
                                           color: Color.fromRGBO(16, 86, 82, 1)),
                                     ),
-                                    // border: OutlineInputBorder(
-                                    //   borderSide: BorderSide(
-                                    //       color: ColorConstants.primary,
-                                    //       width: 0.0),
-                                    // )
                                   )),
                               const SizedBox(height: 10),
                               TextField(
@@ -157,17 +142,12 @@ class SignUp extends StatelessWidget {
                                           color:
                                               Color.fromRGBO(153, 146, 132, 1)),
                                     ),
-                                    hintText: passwordHint,
+                                    hintText: Constants.passwordHintText,
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           width: 0.0,
                                           color: Color.fromRGBO(16, 86, 82, 1)),
                                     ),
-                                    // border: OutlineInputBorder(
-                                    //   borderSide: BorderSide(
-                                    //       color: ColorConstants.primary,
-                                    //       width: 0.0),
-                                    // )
                                   )),
                               const SizedBox(height: 20),
                               SizedBox(
@@ -177,13 +157,14 @@ class SignUp extends StatelessWidget {
                                         primary: const Color.fromRGBO(
                                             185, 22, 70, 1)),
                                     onPressed: () async {
+                                      //Check user sign up and info correct or not
                                       await authController.signUp()
-                                          ? Get.offAll(const LandingPage())
-                                          : Get.snackbar(authFail,
+                                          ? Get.toNamed('/')
+                                          : Get.snackbar(Constants.authFailText,
                                               authController.errorText.value);
                                     },
                                     child: const Text(
-                                      signUp,
+                                      Constants.signUpText,
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold,
@@ -199,6 +180,6 @@ class SignUp extends StatelessWidget {
           ),
         ],
       );
-    })));
+    }));
   }
 }

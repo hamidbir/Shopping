@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Constants {
+  // These lists for Admin panel
   static List<String> taskCategoryList = [
     'چرم',
     'اسپورت',
@@ -46,4 +47,17 @@ class Constants {
     Colors.lightGreen.value.toString(),
     Colors.indigo.value.toString(),
   ];
+  // Const for Login page
+  static const String signUp = 'هنوز ثبت نام نکرده اید؟ ثبت نام';
+  static const String login = 'ورود';
+  static const String emailHint = 'ایمیل';
+  static const String passwordHint = 'پسورد';
+  static const String authFail = 'احرازهویت شکست خورد';
+  // Const for sign up page
+  static const String loginText = ' ثبت نام کرده اید؟ ورود';
+  static const String signUpText = 'ثبت نام';
+  static const String nameHintText = 'نام کاربری';
+  static const String emailHintText = 'ایمیل';
+  static const String passwordHintText = 'پسورد';
+  static const String authFailText = 'احرازهویت شکست خورد';
 }

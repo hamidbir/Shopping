@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/home_page_controller.dart';
 import 'package:shopping_shoe/controller/shoe_card_controller.dart';
-import 'package:shopping_shoe/utils/route_transition.dart';
-import 'package:shopping_shoe/view/pages/cart_screen.dart';
 import 'package:shopping_shoe/view/pages/home/home_page.dart';
-import 'package:shopping_shoe/view/pages/profile_view.dart';
 import 'package:shopping_shoe/view/pages/home/trend_view.dart';
 
 class MainScreen extends StatelessWidget {

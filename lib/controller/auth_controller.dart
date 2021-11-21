@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/repository/cloud_function.dart';
-import 'package:shopping_shoe/utils/storage.dart';
 
 class AuthController extends GetxController {
   var errorText = ''.obs;
@@ -44,8 +43,8 @@ class AuthController extends GetxController {
           isAdmin.value = true;
         }
         userId = userCredential.user!.uid;
-        Storage().setLoginValue();
-        await Storage().setUid(userCredential.user!.uid);
+        // Storage().setLoginValue();
+        // await Storage().setUid(userCredential.user!.uid);
 
         isLoading.value = false;
         return true;
@@ -87,8 +86,8 @@ class AuthController extends GetxController {
         await CloudFunction().saveUser(userCredential.user!.uid,
             emailController.value.text, usernameController.value.text);
         userId = userCredential.user!.uid;
-        await Storage().setLoginValue();
-        await Storage().setUid(userCredential.user!.uid);
+        // await Storage().setLoginValue();
+        // await Storage().setUid(userCredential.user!.uid);
         isLoading.value = false;
         return true;
       } on FirebaseAuthException catch (e) {

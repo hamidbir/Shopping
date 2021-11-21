@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/admin_controller.dart';
@@ -8,12 +5,7 @@ import 'package:shopping_shoe/utils/color_const.dart';
 import 'package:shopping_shoe/utils/constants.dart';
 
 class AdminPanel extends StatelessWidget {
-  AdminPanel({Key? key}) : super(key: key);
-  // TextEditingController taskCatConteroller = TextEditingController(
-  //   text: 'انتخاب دسته بندی',
-  // );
-  // TextEditingController taskTitleConteroller = TextEditingController();
-  // TextEditingController taskDescriptionConteroller = TextEditingController();
+  const AdminPanel({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

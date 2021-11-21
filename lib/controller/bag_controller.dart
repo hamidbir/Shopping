@@ -8,6 +8,8 @@ class BagController extends GetxController {
   var isLoading = true.obs;
   var isNetworkError = false.obs;
   var itemList = <BagModel>[].obs;
+
+  var totalPriceOld = 0.obs;
   var totalPrice = 0.obs;
   AuthController auth = Get.find();
 
@@ -15,22 +17,14 @@ class BagController extends GetxController {
   void onInit() {
     super.onInit();
     fetchBagItem();
-    print('Item: ${itemList.length}');
-    print(itemList);
   }
 
   Future<void> deleteShoeAsCart(int index) async {
     isLoading.value = true;
     await CloudFunction().delAsCart(itemList[index], auth.userId);
+    totalPriceOld.value = totalPrice.value;
     fetchBagItem();
     isLoading.value = false;
-  }
-
-  Future checkOut() async {
-    totalPrice.value = 0;
-    await CloudFunction().checkOut();
-    itemList.clear();
-    await fetchBagItem();
   }
 
   Future fetchBagItem() async {

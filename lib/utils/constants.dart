@@ -60,4 +60,27 @@ class Constants {
   static const String emailHintText = 'ایمیل';
   static const String passwordHintText = 'پسورد';
   static const String authFailText = 'احرازهویت شکست خورد';
+  // for profileView
+  static List<String> items = [
+    'موردعلاقه ها',
+    'تنظمیات',
+    'وضعیت آخرین سفارش',
+    'تاریخچه سفارشات',
+    'تغییر آدرس',
+    'گزارش خطا',
+    'خروج از حساب کاربری'
+  ];
+  static List<Icon> icons = [
+    const Icon(Icons.favorite,
+        size: 123, color: Color.fromRGBO(185, 22, 70, 1)),
+    const Icon(Icons.settings,
+        size: 123, color: Color.fromRGBO(185, 22, 70, 1)),
+    const Icon(Icons.swap_horiz_sharp,
+        size: 123, color: Color.fromRGBO(185, 22, 70, 1)),
+    const Icon(Icons.history, size: 123, color: Color.fromRGBO(185, 22, 70, 1)),
+    const Icon(Icons.home, size: 123, color: Color.fromRGBO(185, 22, 70, 1)),
+    const Icon(Icons.report, size: 123, color: Color.fromRGBO(185, 22, 70, 1)),
+    const Icon(Icons.exit_to_app,
+        size: 123, color: Color.fromRGBO(185, 22, 70, 1)),
+  ];
 }

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shopping_shoe/model/bag_model.dart';
 import 'package:shopping_shoe/model/shoe.dart';
-import 'package:shopping_shoe/utils/storage.dart';
 
 class CloudFunction {
   static final firebaseIns = FirebaseFirestore.instance;
@@ -115,16 +114,6 @@ class CloudFunction {
   Future<List<QueryDocumentSnapshot>> getFromFavorites(String uid) async {
     final res = await users.doc(uid).collection('favorites').get();
     return res.docs;
-  }
-
-  Future<void> checkOut() async {
-    final uid = Storage().getUid();
-    final cartCollection = await users.doc(uid).collection('cart').get();
-    for (var doc in cartCollection.docs) {
-      await firebaseIns.runTransaction((Transaction transaction) async {
-        /*await*/ transaction.delete(doc.reference);
-      });
-    }
   }
 
   Future<List<QueryDocumentSnapshot>> getBannerImage() async {

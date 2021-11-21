@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/auth_controller.dart';
 import 'package:shopping_shoe/model/shoe.dart';
 import 'package:shopping_shoe/repository/cloud_function.dart';
-import 'package:shopping_shoe/utils/storage.dart';
 
 class FavController extends GetxController {
   final AuthController auth = Get.find();

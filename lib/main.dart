@@ -2,23 +2,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:shopping_shoe/view/pages/admin_panel.dart';
 import 'package:shopping_shoe/view/pages/auth/login.dart';
 import 'package:shopping_shoe/view/pages/auth/sign_up.dart';
-import 'package:shopping_shoe/view/pages/cart_screen.dart';
-import 'package:shopping_shoe/view/pages/detail_shoe.dart';
-import 'package:shopping_shoe/view/pages/home/home_page.dart';
+import 'package:shopping_shoe/view/pages/cart/cart_screen.dart';
+import 'package:shopping_shoe/view/pages/detail/detail_shoe.dart';
 import 'package:shopping_shoe/view/pages/home/main_screen.dart';
-import 'package:shopping_shoe/view/pages/my_profile.dart';
-import 'package:shopping_shoe/view/pages/profile_view.dart';
+import 'package:shopping_shoe/view/pages/profile/profile_view.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
-  // get storage init initilize
-  await GetStorage.init();
+
   runApp(const MyApp());
 }
 

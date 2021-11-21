@@ -51,7 +51,7 @@ class ShoeCardController extends GetxController {
     isLoading.value = false;
   }
 
-  Future/*<bool>*/ addToCart() async {
+  Future<bool> addToCart() async {
     isLoading.value = true;
     BagModel bag = BagModel(
         shoeId: shoe.id,
@@ -78,8 +78,9 @@ class ShoeCardController extends GetxController {
         .addToCart(auth.userId /*Storage().getUid()*/, bag.toMap());
     //await bagController.fetchBagItem();
     // await favouritesController.fetchFavData();
-    addedToCart.value = true;
     isLoading.value = false;
+    return true;
+    // addedToCart.value = false;
   }
 
   void updateShoe() async {

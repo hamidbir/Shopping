@@ -6,10 +6,7 @@ import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/auth_controller.dart';
 import 'package:shopping_shoe/utils/color_const.dart';
 import 'package:shopping_shoe/utils/constants.dart';
-import 'package:shopping_shoe/utils/route_transition.dart';
-import 'package:shopping_shoe/view/pages/auth/login.dart';
-import 'package:shopping_shoe/view/pages/landing_page.dart';
-import 'package:shopping_shoe/view/pages/home/main_screen.dart';
+import 'package:shopping_shoe/view/widgets/loading_widget.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({Key? key}) : super(key: key);
@@ -33,17 +30,7 @@ class SignUp extends StatelessWidget {
           ),
           Center(
             child: authController.isLoading.value
-                ? Container(
-                    width: 250,
-                    height: 250,
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.white),
-                    // Package Flare for loading
-                    child: const FlareActor(
-                      'assets/shoe.flr',
-                      animation: 'on',
-                      fit: BoxFit.contain,
-                    ))
+                ? loadingWidget(isBack: true)
                 : ClipRect(
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),

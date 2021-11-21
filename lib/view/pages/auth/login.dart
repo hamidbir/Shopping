@@ -10,6 +10,7 @@ import 'package:shopping_shoe/utils/route_transition.dart';
 import 'package:shopping_shoe/view/pages/admin_panel.dart';
 import 'package:shopping_shoe/view/pages/auth/sign_up.dart';
 import 'package:shopping_shoe/view/pages/home/main_screen.dart';
+import 'package:shopping_shoe/view/widgets/loading_widget.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -35,16 +36,7 @@ class Login extends StatelessWidget {
             child: authController.isLoading.value
                 ?
                 //Loading UI
-                Container(
-                    width: 250,
-                    height: 250,
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.white),
-                    child: const FlareActor(
-                      'assets/shoe.flr',
-                      animation: 'on',
-                      fit: BoxFit.contain,
-                    ))
+                loadingWidget(isBack: true)
                 :
                 //blur Contanier
                 ClipRect(

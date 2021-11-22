@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/shoe_card_controller.dart';
-import 'package:shopping_shoe/utils/color_const.dart';
+
 import 'package:shopping_shoe/view/pages/detail/build_image.dart';
 import 'package:shopping_shoe/view/pages/detail/build_item_color.dart';
 import 'package:shopping_shoe/view/pages/detail/build_item_size.dart';

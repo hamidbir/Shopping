@@ -10,7 +10,9 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final ShoeCardController shoeControll = Get.put(ShoeCardController());
+    // ignore: unused_local_variable
     final HomePageController homeControll = Get.put(HomePageController());
     return WillPopScope(
       onWillPop: () async => false,

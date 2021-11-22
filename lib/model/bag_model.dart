@@ -4,7 +4,7 @@ class BagModel {
   final String shoeColor;
   final String shoeSize;
   final String shoeImg;
-  //final int shoeQuantity;
+
   //-------------
   final String shoePrice;
 
@@ -14,7 +14,6 @@ class BagModel {
       required this.shoeColor,
       required this.shoeSize,
       required this.shoeImg,
-      //required this.shoeQuantity,
       required this.shoePrice});
 
   factory BagModel.fromMap(var map) {

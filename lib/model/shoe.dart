@@ -4,7 +4,6 @@ import 'package:shopping_shoe/utils/map_function.dart';
 class Shoe {
   final String id;
   final String name;
-//  final String brand;
 
   final List<String> category;
   final List<String> imageURL;
@@ -15,14 +14,11 @@ class Shoe {
   //-------------------------------
   int view;
   final int number;
-
   var isFav = 'Idle'.obs;
-  //final double rating;
 
   Shoe({
     required this.id,
     required this.name,
-    //    required this.brand,
     required this.category,
     required this.imageURL,
     required this.price,
@@ -31,13 +27,11 @@ class Shoe {
     required this.description,
     this.view = 0,
     this.number = 0,
-    //required this.rating
   });
   factory Shoe.fromMap(/*Map<String, dynamic>*/ var map) {
     return Shoe(
         id: map['id'],
         name: map['name'],
-        //  brand: map['brand'],
         category: listFromMap(map['category']),
         imageURL: listFromMap(map['imageURL']),
         price: map['price'],
@@ -45,15 +39,12 @@ class Shoe {
         size: listFromMap(map['size']),
         description: map['description'],
         view: map['view'],
-        number: map['number']
-        //rating: map['rating'].toDouble(),
-        );
+        number: map['number']);
   }
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
-      //'brand': brand,
       'category': listToMap(category),
       'imageURL': listToMap(imageURL),
       'price': price,
@@ -62,7 +53,6 @@ class Shoe {
       'description': description,
       'view': view,
       'number': number,
-      //'rating': rating,
     };
   }
 }

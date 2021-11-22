@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/profile_controller.dart';
-import 'package:shopping_shoe/utils/color_const.dart';
+
 import 'package:shopping_shoe/view/widgets/make_item.dart';
 
 Widget showFav(double width, double height) {
@@ -16,7 +16,7 @@ Widget showFav(double width, double height) {
       if (myProfileController.isLoading.value) {
         return const Center(
             child: CircularProgressIndicator(
-          backgroundColor: ColorConstants.white,
+          backgroundColor: Colors.white,
         ));
       } else {
         return SizedBox(

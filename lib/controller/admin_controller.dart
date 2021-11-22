@@ -15,6 +15,8 @@ class AdminController extends GetxController {
   String image = "";
   var sizes = [].obs;
   var colors = [].obs;
+  // For next git tag updated it
+  var number = 0.obs;
   var category = [].obs;
   var imageUrl = [].obs;
   //------------------------
@@ -33,7 +35,6 @@ class AdminController extends GetxController {
   void onInit() {
     super.onInit();
     shoeNameConteroller = TextEditingController();
-
     shoeNameConteroller = TextEditingController();
     shoeCatConteroller = TextEditingController(text: currentCat.value);
     shoeColorConteroller = TextEditingController(text: currentColor.value);
@@ -57,7 +58,6 @@ class AdminController extends GetxController {
 
     colorsSave.add(currentColor.value);
     colors.add(currentColor.value);
-    //colorsSave.add(shoeColorConteroller.text);
   }
 
   void removeColor(int index) {
@@ -87,12 +87,7 @@ class AdminController extends GetxController {
       final reader = FileReader();
       reader.readAsDataUrl(file);
       reader.onLoadEnd.listen((event) {
-        //isLoading.value = true;
-        // var res = reader.result.toString();
-        // String ress = res.substring(res.indexOf(',') + 1);
-        // imageUrl.add(ress);
         onSelected(file);
-        //isLoading.value = false;
       });
     });
   }
@@ -145,7 +140,6 @@ class AdminController extends GetxController {
         'description': 'shoe is good',
         'view': 5,
         'number': 10
-        //'rating': '10',
       };
       await CloudFunction().saveNewShoe(shoeMap, id /* Storage().getUid()*/);
       shoeNameConteroller.clear();

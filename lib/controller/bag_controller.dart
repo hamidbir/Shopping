@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/auth_controller.dart';
 import 'package:shopping_shoe/model/bag_model.dart';
@@ -40,13 +41,11 @@ class BagController extends GetxController {
         totalPrice.value = totalPrice.value + int.parse(shoe.get('price'));
       }
     } on Exception {
-      print('error occure');
+      debugPrint('error occure');
       isNetworkError.value = true;
     } catch (e) {
-      print(e.toString());
       isNetworkError.value = true;
     }
-    //isNetworkError.value = true;
     isLoading.value = false;
   }
 }

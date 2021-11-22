@@ -1,15 +1,13 @@
 import 'dart:ui';
 
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/auth_controller.dart';
-import 'package:shopping_shoe/utils/color_const.dart';
 import 'package:shopping_shoe/utils/constants.dart';
 import 'package:shopping_shoe/view/widgets/loading_widget.dart';
 
 class SignUp extends StatelessWidget {
-  SignUp({Key? key}) : super(key: key);
+  const SignUp({Key? key}) : super(key: key);
 
   static FocusNode nameNode = FocusNode();
   static FocusNode emailNode = FocusNode();
@@ -51,7 +49,7 @@ class SignUp extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 32,
                                     fontWeight: FontWeight.bold,
-                                    color: ColorConstants.dark),
+                                    color: Colors.black),
                               ),
                               const SizedBox(height: 10),
                               InkWell(
@@ -63,7 +61,7 @@ class SignUp extends StatelessWidget {
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
-                                      color: ColorConstants.dark),
+                                      color: Colors.black),
                                 ),
                               ),
                               const SizedBox(height: 20),
@@ -155,7 +153,7 @@ class SignUp extends StatelessWidget {
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold,
-                                          color: ColorConstants.dark),
+                                          color: Colors.black),
                                     )),
                               )
                             ],

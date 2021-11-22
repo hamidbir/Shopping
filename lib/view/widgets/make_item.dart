@@ -5,7 +5,6 @@ import 'package:shopping_shoe/controller/home_page_controller.dart';
 import 'package:shopping_shoe/controller/profile_controller.dart';
 import 'package:shopping_shoe/controller/shoe_card_controller.dart';
 import 'package:shopping_shoe/model/shoe.dart';
-import 'package:shopping_shoe/utils/color_const.dart';
 
 Widget makeItem(Shoe shoe, int index, {bool isFav = false}) {
   //For home page
@@ -38,10 +37,7 @@ Widget makeItem(Shoe shoe, int index, {bool isFav = false}) {
             fit: BoxFit.cover,
           ),
           boxShadow: const [
-            BoxShadow(
-                color: ColorConstants.grey,
-                blurRadius: 10,
-                offset: Offset(0, 10))
+            BoxShadow(color: Colors.grey, blurRadius: 10, offset: Offset(0, 10))
           ],
           color: Color(int.parse(shoe.colors[0]))),
       child: Stack(
@@ -90,7 +86,7 @@ Widget makeItem(Shoe shoe, int index, {bool isFav = false}) {
                                       style: const TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,
-                                          color: ColorConstants.white)),
+                                          color: Colors.white)),
                                 )),
                           );
                         })),
@@ -110,7 +106,7 @@ Widget makeItem(Shoe shoe, int index, {bool isFav = false}) {
                       height: 35,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: ColorConstants.white,
+                          color: Colors.white,
                           border: Border.all(color: Colors.red)),
                       child: const Center(
                           child: Icon(
@@ -134,7 +130,7 @@ Widget makeItem(Shoe shoe, int index, {bool isFav = false}) {
                         height: 35,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: ColorConstants.white,
+                            color: Colors.white,
                             border: Border.all(color: Colors.red)),
                         child: Center(
                             child: FlareActor(

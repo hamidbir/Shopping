@@ -8,7 +8,7 @@ class AuthController extends GetxController {
   var isVerified = false.obs;
   var isLoading = false.obs;
   var isAdmin = false.obs;
-  late final userId;
+  late final String userId;
 
   // Textfield controller
   late TextEditingController emailController =
@@ -37,15 +37,12 @@ class AuthController extends GetxController {
             await firebaseAuth.signInWithEmailAndPassword(
                 email: emailController.text, password: passwordController.text);
 
-        final userdetails = await CloudFunction()
-            .getUserDetail(/*Storage().getUid()*/ userCredential.user!.uid);
+        final userdetails =
+            await CloudFunction().getUserDetail(userCredential.user!.uid);
         if (userdetails['role'] == 'admin') {
           isAdmin.value = true;
         }
         userId = userCredential.user!.uid;
-        // Storage().setLoginValue();
-        // await Storage().setUid(userCredential.user!.uid);
-
         isLoading.value = false;
         return true;
       } on FirebaseAuthException catch (e) {
@@ -64,7 +61,7 @@ class AuthController extends GetxController {
         return false;
       } catch (e) {
         errorText.value = 'اوپس. مشکلی رخ داد :(';
-        print(e.toString());
+        debugPrint(e.toString());
         isLoading.value = false;
         return false;
       }
@@ -86,8 +83,6 @@ class AuthController extends GetxController {
         await CloudFunction().saveUser(userCredential.user!.uid,
             emailController.value.text, usernameController.value.text);
         userId = userCredential.user!.uid;
-        // await Storage().setLoginValue();
-        // await Storage().setUid(userCredential.user!.uid);
         isLoading.value = false;
         return true;
       } on FirebaseAuthException catch (e) {

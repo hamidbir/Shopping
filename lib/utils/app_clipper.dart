@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/bag_controller.dart';
 import 'package:shopping_shoe/controller/shoe_card_controller.dart';
-import 'package:shopping_shoe/model/bag_model.dart';
 import 'package:shopping_shoe/model/shoe.dart';
-import 'package:shopping_shoe/utils/color_const.dart';
 
 //This Class create shape background  for trendview and cart
 class AppClipper extends CustomClipper<Path> {
@@ -107,7 +105,7 @@ Widget buildItemTrendList(Shoe shoe) {
                     height: 35,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: ColorConstants.white,
+                        color: Colors.white,
                         border: Border.all(color: Colors.red)),
                     child: Center(
                         child: FlareActor(
@@ -193,7 +191,7 @@ Widget buildItemCartList(int index) {
                   height: 25,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: ColorConstants.white,
+                      color: Colors.white,
                       border: Border.all(color: Colors.red)),
                   child: const Center(
                       child: Icon(Icons.delete, size: 15, color: Colors.red))),

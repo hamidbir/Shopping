@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
                   transition: Transition.zoom),
               GetPage(
                   name: '/signup',
-                  page: () => SignUp(),
+                  page: () => const SignUp(),
                   transition: Transition.zoom),
               GetPage(
                   name: '/',
@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
                   transition: Transition.zoom),
               GetPage(
                   name: '/admin_panel',
-                  page: () => AdminPanel(),
+                  page: () => const AdminPanel(),
                   transition: Transition.zoom),
             ],
           );

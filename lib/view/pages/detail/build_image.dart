@@ -2,7 +2,6 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/shoe_card_controller.dart';
-import 'package:shopping_shoe/utils/color_const.dart';
 
 Widget buildImage(
   BuildContext context,
@@ -20,8 +19,7 @@ Widget buildImage(
           fit: BoxFit.cover,
         ),
         boxShadow: const [
-          BoxShadow(
-              color: ColorConstants.grey, blurRadius: 10, offset: Offset(0, 10))
+          BoxShadow(color: Colors.grey, blurRadius: 10, offset: Offset(0, 10))
         ],
       ),
       child: Padding(
@@ -41,7 +39,7 @@ Widget buildImage(
                     height: 35,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: ColorConstants.white,
+                      color: Colors.white,
                       border: Border.all(color: Colors.red),
                     ),
                     child: Center(

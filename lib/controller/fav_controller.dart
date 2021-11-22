@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/auth_controller.dart';
 import 'package:shopping_shoe/model/shoe.dart';
@@ -28,12 +29,10 @@ class FavController extends GetxController {
 
         favList.add(shoe);
       }
-      // print('fav1 ${favList[0].runtimeType}');
-      //  print('fav1 ${favList}');
     } on Exception {
       isNetError.value = true;
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       isNetError.value = true;
     }
   }

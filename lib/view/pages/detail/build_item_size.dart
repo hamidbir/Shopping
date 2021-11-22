@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/shoe_card_controller.dart';
-import 'package:shopping_shoe/utils/color_const.dart';
 
 Widget buildItemSize(int index) {
   ShoeCardController shoeControll = Get.find();
@@ -29,8 +28,8 @@ Widget buildItemSize(int index) {
                 fontWeight: FontWeight.bold,
                 color: shoeControll.selectedSize.value ==
                         shoeControll.shoe.size[index]
-                    ? ColorConstants.white
-                    : ColorConstants.dark)),
+                    ? Colors.white
+                    : Colors.black)),
       ),
     ),
   );

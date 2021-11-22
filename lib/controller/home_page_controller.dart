@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/fav_controller.dart';
 import 'package:shopping_shoe/model/shoe.dart';
@@ -70,7 +71,7 @@ class HomePageController extends GetxController {
       } on IOException {
         isNetError.value = true;
       } catch (e) {
-        print(e.toString());
+        debugPrint(e.toString());
         isNetError.value = true;
       }
       isLoading.value = false;

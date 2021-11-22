@@ -17,6 +17,5 @@ Map<String, dynamic> listToMap(List<String> list) {
   if (list.isEmpty) return map;
   map.clear();
   map = {for (i = 0; i < list.length; i++) i.toString(): list[i]};
-  //print(map);
   return map;
 }

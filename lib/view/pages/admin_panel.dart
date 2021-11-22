@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/admin_controller.dart';
-import 'package:shopping_shoe/utils/color_const.dart';
 import 'package:shopping_shoe/utils/constants.dart';
 
 class AdminPanel extends StatelessWidget {
@@ -13,11 +12,11 @@ class AdminPanel extends StatelessWidget {
     final AdminController adminController = Get.put(AdminController());
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: ColorConstants.background,
+          backgroundColor: const Color.fromRGBO(240, 228, 215, 1),
           foregroundColor: Colors.black,
           elevation: 0,
         ),
-        backgroundColor: ColorConstants.background,
+        backgroundColor: const Color.fromRGBO(240, 228, 215, 1),
         body: Obx(() {
           return Padding(
             padding:
@@ -369,7 +368,7 @@ class AdminPanel extends StatelessWidget {
         enabled: enabled,
         key: ValueKey(valueKey),
         style: const TextStyle(
-            color: ColorConstants.dark,
+            color: Colors.black,
             fontWeight: FontWeight.bold,
             fontStyle: FontStyle.italic),
         maxLength: maxLength,
@@ -377,7 +376,7 @@ class AdminPanel extends StatelessWidget {
         keyboardType: TextInputType.text,
         decoration: const InputDecoration(
           filled: true,
-          fillColor: ColorConstants.background,
+          fillColor: Color.fromRGBO(240, 228, 215, 1),
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.white),
           ),

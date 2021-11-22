@@ -1,15 +1,9 @@
 import 'dart:ui';
 
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/auth_controller.dart';
-import 'package:shopping_shoe/utils/color_const.dart';
 import 'package:shopping_shoe/utils/constants.dart';
-import 'package:shopping_shoe/utils/route_transition.dart';
-import 'package:shopping_shoe/view/pages/admin_panel.dart';
-import 'package:shopping_shoe/view/pages/auth/sign_up.dart';
-import 'package:shopping_shoe/view/pages/home/main_screen.dart';
 import 'package:shopping_shoe/view/widgets/loading_widget.dart';
 
 class Login extends StatelessWidget {
@@ -60,7 +54,7 @@ class Login extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 32,
                                     fontWeight: FontWeight.bold,
-                                    color: ColorConstants.dark),
+                                    color: Colors.black),
                               ),
                               InkWell(
                                 onTap: () {
@@ -73,7 +67,7 @@ class Login extends StatelessWidget {
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
-                                      color: ColorConstants.dark),
+                                      color: Colors.black),
                                 ),
                               ),
                               const SizedBox(height: 20),
@@ -101,7 +95,8 @@ class Login extends StatelessWidget {
                                       ),
                                       border: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: ColorConstants.primary,
+                                            color:
+                                                Color.fromRGBO(16, 86, 82, 1),
                                             width: 0.0),
                                       ))),
                               const SizedBox(height: 5),
@@ -130,7 +125,8 @@ class Login extends StatelessWidget {
                                       ),
                                       border: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: ColorConstants.primary,
+                                            color:
+                                                Color.fromRGBO(16, 86, 82, 1),
                                             width: 0.0),
                                       ))),
                               const SizedBox(height: 10),

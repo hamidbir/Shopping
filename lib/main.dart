@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
               Locale("fa", "IR"), // OR Locale('ar', 'AE') OR Other RTL locales
             ],
             locale: const Locale("fa", "IR"),
-            title: 'کفش گلریز',
+            title: 'کفش هزارپا',
             theme: ThemeData(
               fontFamily: 'MainFont',
               primarySwatch: Colors.cyan,

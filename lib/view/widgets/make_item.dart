@@ -20,6 +20,7 @@ Widget makeItem(Shoe shoe, int index, {bool isFav = false}) {
       shoeControll.selectedColor.value =
           homeControll.newShoeList[index].colors.first;
       shoe.view++;
+      shoeControll.selectedNumber.value = 1;
       shoeControll.updateShoe();
       Get.toNamed('/detail_shoe');
     },

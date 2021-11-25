@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:shopping_shoe/controller/bag_controller.dart';
 import 'package:shopping_shoe/controller/shoe_card_controller.dart';
 import 'package:shopping_shoe/model/shoe.dart';
+import 'package:shopping_shoe/view/widgets/counter_shoe.dart';
 
 //This Class create shape background  for trendview and cart
 class AppClipper extends CustomClipper<Path> {
@@ -159,7 +160,17 @@ Widget buildItemCartList(int index) {
                             backgroundColor: Color(int.parse(
                                 bagControll.itemList[index].shoeColor)),
                           ),
-                          const Spacer(),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          CounterShoe(
+                              count: bagControll.itemList[index].selectNumber,
+                              upperClick: () {
+                                bagControll.updateNumberShoe(index, inc: true);
+                              },
+                              downerClick: () {
+                                bagControll.updateNumberShoe(index);
+                              }),
                           Text(bagControll.itemList[index].shoeSize),
                         ],
                       ),

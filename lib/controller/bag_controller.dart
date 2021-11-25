@@ -12,6 +12,7 @@ class BagController extends GetxController {
 
   var totalPriceOld = 0.obs;
   var totalPrice = 0.obs;
+  int oldNumber = 0;
   AuthController auth = Get.find();
 
   @override
@@ -38,7 +39,11 @@ class BagController extends GetxController {
       itemList.clear();
       for (var shoe in result) {
         itemList.add(BagModel.fromMap(shoe.data()));
-        totalPrice.value = totalPrice.value + int.parse(shoe.get('price'));
+        itemList.last.shoePrice =
+            (int.parse(itemList.last.shoePrice) * itemList.last.selectNumber)
+                .toString();
+        totalPrice.value =
+            totalPrice.value + int.parse(itemList.last.shoePrice);
       }
     } on Exception {
       debugPrint('error occure');
@@ -47,5 +52,42 @@ class BagController extends GetxController {
       isNetworkError.value = true;
     }
     isLoading.value = false;
+  }
+
+  Future updateNumberShoe(int index, {bool inc = false}) async {
+    if (inc) {
+      itemList[index].selectNumber = itemList[index].selectNumber + 1;
+      print(itemList[index].selectNumber);
+    } else {
+      if (itemList[index].selectNumber > 1) {
+        itemList[index].selectNumber = itemList[index].selectNumber - 1;
+      }
+      print(itemList[index].selectNumber);
+    }
+
+    await CloudFunction().updateNumberBag(itemList[index], auth.userId);
+    await fetchBagItem();
+  }
+
+  Future<int> payment() async {
+    isLoading.value = true;
+    int comp = -1;
+    for (var item in itemList) {
+      comp = await CloudFunction().paymentNumberBag(item);
+      print('Copm : $comp');
+      if (comp == -3) {
+        await CloudFunction().delAsCart(item, auth.userId);
+      } else if (comp == -2) {
+        await CloudFunction().updateNumberBag(item, auth.userId);
+        comp = -2;
+      } else {
+        await CloudFunction()
+            .updateNumberBag(item, auth.userId, updateNumber: comp);
+        comp = -4;
+      }
+    }
+    await fetchBagItem();
+    isLoading.value = false;
+    return comp;
   }
 }

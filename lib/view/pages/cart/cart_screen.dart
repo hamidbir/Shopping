@@ -39,19 +39,49 @@ class CartScreen extends StatelessWidget {
                   // Text(bagControll.totalPrice.value.toString(),
                   //     style: const TextStyle(
                   //         fontWeight: FontWeight.bold, fontSize: 28)),
-                  Container(
-                    width: 350,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        color: Colors.blueAccent,
-                        borderRadius: BorderRadiusDirectional.circular(15)),
-                    child: const Center(
-                      child: Text('پرداخت',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            color: Colors.white,
-                          )),
+                  InkWell(
+                    onTap: () async {
+                      int compare = await bagControll.payment();
+                      print('Compare$compare');
+                      if (compare == -3) {
+                        Get.snackbar('کفش حذف شد',
+                            'بدلیل وجود نداشتن کفش و دیر اقدام کردن در پرداخت کفش توسط کاربر دیگری خریداری شد ',
+                            backgroundColor: Colors.redAccent,
+                            duration: const Duration(seconds: 5));
+                      } else if (compare == -1) {
+                        Get.snackbar(
+                          'خطا در اتصال',
+                          'لطفا دوباره امتحان کنید',
+                          backgroundColor: Colors.orangeAccent,
+                        );
+                      } else if (compare == -4) {
+                        Get.snackbar(
+                          'تصحیح تعداد کفش',
+                          'تعدادی از کفش هایی که به سبد خرید اضافه کردید بدلیل دیر پرداخت کردن، از شما کسر شد ',
+                          backgroundColor: Colors.orangeAccent,
+                        );
+                      } else if (compare == -2) {
+                        Get.snackbar(
+                          'مبارک باشه',
+                          'پرداخت با موفقیت انجام شد',
+                          backgroundColor: Colors.greenAccent,
+                        );
+                      }
+                    },
+                    child: Container(
+                      width: 350,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          color: Colors.blueAccent,
+                          borderRadius: BorderRadiusDirectional.circular(15)),
+                      child: const Center(
+                        child: Text('پرداخت',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.white,
+                            )),
+                      ),
                     ),
                   ),
                 ],

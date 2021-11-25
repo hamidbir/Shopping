@@ -4,9 +4,10 @@ class BagModel {
   final String shoeColor;
   final String shoeSize;
   final String shoeImg;
+  int selectNumber;
 
   //-------------
-  final String shoePrice;
+  String shoePrice;
 
   BagModel(
       {required this.shoeId,
@@ -14,6 +15,7 @@ class BagModel {
       required this.shoeColor,
       required this.shoeSize,
       required this.shoeImg,
+      required this.selectNumber,
       required this.shoePrice});
 
   factory BagModel.fromMap(var map) {
@@ -23,7 +25,7 @@ class BagModel {
         shoeColor: map['color'],
         shoeSize: map['size'],
         shoeImg: map['image'],
-        //shoeQuantity: map['id'],
+        selectNumber: map['selectNumber'],
         shoePrice: map['price']);
   }
   Map<String, dynamic> toMap() {
@@ -34,6 +36,7 @@ class BagModel {
       'color': shoeColor,
       'size': shoeSize,
       'image': shoeImg,
+      'selectNumber': selectNumber
     };
   }
 }

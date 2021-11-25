@@ -27,6 +27,51 @@ class CloudFunction {
     await newProduct.doc(uid).set(shoe);
   }
 
+  Future<void> updateNumberBag(BagModel bag, String uid,
+      {int updateNumber = -5}) async {
+    await users
+        .doc(uid)
+        .collection('cart')
+        .where('id', isEqualTo: bag.shoeId)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        users.doc(uid).collection('cart').doc(element.id).update({
+          "selectNumber": updateNumber == -5 ? bag.selectNumber : updateNumber
+        });
+      });
+    });
+  }
+
+  Future<void> updateNumberShoe(String id, int updateValue) async {
+    await newProduct.doc(id).update({"number": updateValue});
+  }
+
+  Future<int> paymentNumberBag(BagModel bag) async {
+    int ret = -1;
+    await newProduct.doc(bag.shoeId).get().then((value) {
+      var res = value.get("number");
+      print('res: $res');
+      print('bag: ${bag.selectNumber}');
+      if (res < bag.selectNumber) {
+        if (res == 0) {
+          print('res1: $res');
+          ret = -3;
+        } else {
+          print('res2: $res');
+          ret = res;
+        }
+      } else {
+        int min = res - bag.selectNumber;
+        print('min: $min');
+        updateNumberShoe(bag.shoeId, min);
+        print('res5: $res');
+        ret = -2;
+      }
+    });
+    return ret;
+  }
+
   Future<List<QueryDocumentSnapshot>> getnewProducts() async {
     final res = await newProduct.get();
 

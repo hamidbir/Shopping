@@ -8,6 +8,7 @@ import 'package:shopping_shoe/view/pages/detail/build_image.dart';
 import 'package:shopping_shoe/view/pages/detail/build_item_color.dart';
 import 'package:shopping_shoe/view/pages/detail/build_item_size.dart';
 import 'package:shopping_shoe/view/pages/detail/show_price.dart';
+import 'package:shopping_shoe/view/widgets/counter_shoe.dart';
 import 'package:shopping_shoe/view/widgets/loading_widget.dart';
 
 class DetailShoe extends StatelessWidget {
@@ -134,6 +135,59 @@ class DetailShoe extends StatelessWidget {
                                       );
                                     },
                                   ),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text('تعداد جفت',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: (identical(
+                                                    int.parse(shoeControll
+                                                        .shoe.colors[0]),
+                                                    Colors.white.value) ||
+                                                identical(
+                                                    int.parse(shoeControll
+                                                        .shoe.colors[0]),
+                                                    Colors.yellow.value))
+                                            ? Colors.black
+                                            : Colors.white,
+                                      )),
+                                ),
+                                Container(
+                                  color: Colors.yellow,
+                                  child: Obx(() {
+                                    return CounterShoe(
+                                        count:
+                                            shoeControll.selectedNumber.value,
+                                        upperClick: () {
+                                          if (shoeControll
+                                                  .selectedNumber.value <=
+                                              shoeControll.shoe.number) {
+                                            shoeControll.selectedNumber.value =
+                                                shoeControll
+                                                        .selectedNumber.value +
+                                                    1;
+                                          } else {
+                                            Get.snackbar('هشدار',
+                                                'شما حداکثر تعداد کفش ها را انتخاب کرده اید',
+                                                backgroundColor:
+                                                    Colors.orangeAccent);
+                                          }
+                                        },
+                                        downerClick: () {
+                                          if (shoeControll
+                                                  .selectedNumber.value >
+                                              1) {
+                                            shoeControll.selectedNumber.value =
+                                                shoeControll
+                                                        .selectedNumber.value -
+                                                    1;
+                                          }
+                                        });
+                                  }),
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,

@@ -12,6 +12,7 @@ class ShoeCardController extends GetxController {
   var selectedColor = ''.obs;
   var addedToCart = false.obs;
   var favourite = false.obs;
+  var selectedNumber = 1.obs;
 
   void selectSize(int index) async {
     isLoading.value = true;
@@ -39,14 +40,19 @@ class ShoeCardController extends GetxController {
 
   Future<bool> addToCart() async {
     isLoading.value = true;
+
     BagModel bag = BagModel(
         shoeId: shoe.id,
         shoeName: shoe.name,
         shoeColor: selectedColor.value,
+        selectNumber: selectedNumber.value,
         shoeSize: selectedSize.value,
         shoeImg: shoe.imageURL[0],
         shoePrice: shoe.price);
     await CloudFunction().addToCart(auth.userId, bag.toMap());
+    if (shoe.number > 0) {
+      shoe.number -= selectedNumber.value;
+    }
     isLoading.value = false;
     return true;
   }

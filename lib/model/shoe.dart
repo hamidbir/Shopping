@@ -13,7 +13,7 @@ class Shoe {
   final String description;
   //-------------------------------
   int view;
-  final int number;
+  int number;
   var isFav = 'Idle'.obs;
 
   Shoe({

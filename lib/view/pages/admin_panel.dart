@@ -53,8 +53,8 @@ class AdminPanel extends StatelessWidget {
                                     return Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: SizedBox(
-                                          width: double.infinity,
-                                          height: 50,
+                                          width: 200,
+                                          height: 200,
                                           // child: Image.memory(base64Decode(
                                           //     adminController
                                           //         .imageUrl[index]))
@@ -146,7 +146,15 @@ class AdminPanel extends StatelessWidget {
                                         controller: adminController
                                             .shoePriceConteroller,
                                         onClick: () {},
-                                        maxLength: 100),
+                                        maxLength: 10),
+                                    _textTile('تعداد کفش'),
+                                    _textFormField(
+                                        valueKey: 'TaskNumber',
+                                        enabled: true,
+                                        controller: adminController
+                                            .shoeNumberConteroller,
+                                        onClick: () {},
+                                        maxLength: 2),
                                     _textTile('اندازه'),
                                     Row(
                                       children: [
@@ -158,7 +166,7 @@ class AdminPanel extends StatelessWidget {
                                               controller: adminController
                                                   .shoeSizeConteroller,
                                               onClick: () {},
-                                              maxLength: 100),
+                                              maxLength: 2),
                                         ),
                                         TextButton(
                                             onPressed: () {
@@ -289,6 +297,7 @@ class AdminPanel extends StatelessWidget {
       {bool color = false}) {
     final AdminController admin = Get.find();
     return AlertDialog(
+        backgroundColor: Colors.tealAccent,
         actions: [
           TextButton(
               onPressed: () {
@@ -321,12 +330,8 @@ class AdminPanel extends StatelessWidget {
                         Navigator.of(context).pop();
                       },
                       child: CircleAvatar(
-                        radius: 19,
-                        backgroundColor: Colors.black,
-                        child: CircleAvatar(
-                          radius: 17,
-                          backgroundColor: Color(int.parse(list[index])),
-                        ),
+                        radius: 18,
+                        backgroundColor: Color(int.parse(list[index])),
                       ),
                     );
                   },

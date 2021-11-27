@@ -30,6 +30,7 @@ class AdminController extends GetxController {
   late TextEditingController shoeCatConteroller;
   late TextEditingController shoeColorConteroller;
   late TextEditingController shoeSizeConteroller;
+  late TextEditingController shoeNumberConteroller;
 
   @override
   void onInit() {
@@ -40,6 +41,7 @@ class AdminController extends GetxController {
     shoeColorConteroller = TextEditingController(text: currentColor.value);
     shoeSizeConteroller = TextEditingController();
     shoePriceConteroller = TextEditingController();
+    shoeNumberConteroller = TextEditingController();
   }
 
   void addSize() {
@@ -118,6 +120,8 @@ class AdminController extends GetxController {
       errorText.value = 'اسم کفش یادت رفت';
     } else if (shoePriceConteroller.text.trim().isEmpty) {
       errorText.value = 'کفش مفته!! قیمت نداره که';
+    } else if (shoeNumberConteroller.text.trim().isEmpty) {
+      errorText.value = 'تعداد کفش مشخص نیست';
     } else if (sizes.isEmpty) {
       errorText.value = 'کفش اندازه نداره';
     } else if (colors.isEmpty) {
@@ -139,10 +143,11 @@ class AdminController extends GetxController {
         'size': listToMap(sizesSave),
         'description': 'shoe is good',
         'view': 5,
-        'number': 10
+        'number': shoeNumberConteroller.text,
       };
       await CloudFunction().saveNewShoe(shoeMap, id /* Storage().getUid()*/);
       shoeNameConteroller.clear();
+      shoeNumberConteroller.clear();
       shoePriceConteroller.clear();
       shoeCatConteroller.text = 'انتخاب دسته بندی';
       shoeColorConteroller.text = 'انتخاب رنگ';

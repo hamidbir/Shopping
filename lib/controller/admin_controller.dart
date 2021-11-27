@@ -143,7 +143,7 @@ class AdminController extends GetxController {
         'size': listToMap(sizesSave),
         'description': 'shoe is good',
         'view': 5,
-        'number': shoeNumberConteroller.text,
+        'number': int.tryParse(shoeNumberConteroller.text),
       };
       await CloudFunction().saveNewShoe(shoeMap, id /* Storage().getUid()*/);
       shoeNameConteroller.clear();

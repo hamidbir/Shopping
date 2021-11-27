@@ -13,7 +13,10 @@ class ProfileView extends StatelessWidget {
     final MyProfileController myProfileController =
         Get.put(MyProfileController());
     return WillPopScope(
-      onWillPop: () async => true,
+      onWillPop: () async {
+        Get.back();
+        return Future.value(true);
+      },
       child: Scaffold(
         body: Obx(() {
           if (myProfileController.isLoading.value) {

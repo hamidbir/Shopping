@@ -19,7 +19,12 @@ class DetailShoe extends StatelessWidget {
     ShoeCardController shoeControll = Get.find();
 
     return WillPopScope(
-      onWillPop: () async => true,
+      onWillPop: () async {
+        print("returned");
+        Get.back();
+
+        return Future.value(true);
+      },
       child: Scaffold(
         body: SingleChildScrollView(
           child: Obx(() {

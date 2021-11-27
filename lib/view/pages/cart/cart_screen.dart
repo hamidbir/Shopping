@@ -12,7 +12,10 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     BagController bagControll = Get.put(BagController());
     return WillPopScope(
-      onWillPop: () async => true,
+      onWillPop: () async {
+        Get.back();
+        return Future.value(true);
+      },
       child: Scaffold(
           body: Row(
         children: [

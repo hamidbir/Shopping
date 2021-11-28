@@ -74,7 +74,7 @@ Widget buildItemTrendList(Shoe shoe) {
                 const SizedBox(height: 8.0),
                 Padding(
                   padding: const EdgeInsets.only(right: 22.0),
-                  child: Text(shoe.price,
+                  child: Text(shoe.number == 0 ? 'ناموجود' : shoe.price,
                       style: TextStyle(
                           color: (identical(int.parse(shoe.colors[0]),
                                       Colors.white.value) ||

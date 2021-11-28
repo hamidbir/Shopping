@@ -14,15 +14,17 @@ Widget makeItem(Shoe shoe, int index, {bool isFav = false}) {
 
   return InkWell(
     onTap: () {
-      shoeControll.shoe = homeControll.newShoeList[index];
-      shoeControll.selectedSize.value =
-          homeControll.newShoeList[index].size.first;
-      shoeControll.selectedColor.value =
-          homeControll.newShoeList[index].colors.first;
-      shoe.view++;
-      shoeControll.selectedNumber.value = 1;
-      shoeControll.updateShoe();
-      Get.toNamed('/detail_shoe');
+      if (shoeControll.shoe.number != 0) {
+        shoeControll.shoe = homeControll.newShoeList[index];
+        shoeControll.selectedSize.value =
+            homeControll.newShoeList[index].size.first;
+        shoeControll.selectedColor.value =
+            homeControll.newShoeList[index].colors.first;
+        shoe.view++;
+        shoeControll.selectedNumber.value = 1;
+        shoeControll.updateShoe();
+        Get.toNamed('/detail_shoe');
+      }
     },
     child: Container(
       height: 250,
@@ -154,7 +156,7 @@ Widget makeItem(Shoe shoe, int index, {bool isFav = false}) {
                 // : color.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(25),
               ),
-              child: Text(shoe.price,
+              child: Text(shoe.number == 0 ? 'ناموجود' : shoe.price,
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,

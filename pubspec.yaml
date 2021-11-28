@@ -65,6 +65,10 @@ flutter:
     - assets/loading.flr
     - assets/shoe.flr
     - assets/ShoeLoading.flr
+    - assets/Milipede3.flr
+    - assets/Milipede1.flr
+    - assets/Milipede2.flr
+    - assets/Teddy.flr
 
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

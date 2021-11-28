@@ -34,14 +34,16 @@ class TrendView extends StatelessWidget {
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () {
-        shoeControll.shoe = homeControll.trendList[index];
-        shoeControll.selectedSize.value =
-            homeControll.trendList[index].size.first;
-        shoeControll.selectedColor.value =
-            homeControll.trendList[index].colors.first;
-        homeControll.trendList[index].view++;
-        shoeControll.updateShoe();
-        Get.toNamed('/detail_shoe');
+        if (shoeControll.shoe.number == 0) {
+          shoeControll.shoe = homeControll.trendList[index];
+          shoeControll.selectedSize.value =
+              homeControll.trendList[index].size.first;
+          shoeControll.selectedColor.value =
+              homeControll.trendList[index].colors.first;
+          homeControll.trendList[index].view++;
+          shoeControll.updateShoe();
+          Get.toNamed('/detail_shoe');
+        }
       },
       child: Container(
         width: 200,

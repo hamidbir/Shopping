@@ -47,12 +47,9 @@ flutter run -d chrome --web-renderer html
 
 ![fav](https://user-images.githubusercontent.com/44016199/144702071-35283bdb-2d16-4087-a3c5-f80c8e228ace.png)
 
+## Animation Authentication
 
-
-
-
-
-
+![ezgif-6-daa6206f5478](https://user-images.githubusercontent.com/44016199/144708015-f01d3cd2-9f15-4059-8747-d8e9478ee8b4.gif)
 
 
 ## What is Flutter?
